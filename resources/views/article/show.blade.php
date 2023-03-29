@@ -3,7 +3,7 @@
 @section('title', $article->title)
 @section('keywords', $article->keywords)
 @section('css')
-    <link rel="stylesheet" href="{{ asset('plugins/highlight/styles/atelier-dune-dark.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/highlight/styles/atelier-forest-light.css') }}">
 @endsection
 @section('container')
     <div class="row">

@@ -19,7 +19,7 @@ class ViewServiceProvider extends ServiceProvider
     protected array $composers = [
         ConfigsComposer::class         => ['layouts.footer', 'layouts.nav', 'master'],
         TagsComposer::class            => 'layouts.tags',
-        CategoriesComposer::class      => 'layouts.footer',
+        CategoriesComposer::class      => 'layouts.nav',
         HotsComposer::class            => 'layouts.hots',
         FriendshipLinksComposer::class => 'layouts.friendship_links',
         NewCommentsComposer::class     => 'layouts.newest_comments',

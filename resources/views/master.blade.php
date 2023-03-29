@@ -13,7 +13,7 @@
     <meta name="keywords" content="{{ $configs['keywords'] ?? '' }},@yield('keywords', '')">
     <meta name="description" content="{{ $configs['description'] ?? '' }}">
     <link href="{{ asset('css/ie10-viewport-bug-workaround.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     @yield('css')
     <!--[if lt IE 9]>
     <script src="../../assets/js/ie8-responsive-file-warning.js"></script>
@@ -44,7 +44,6 @@
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/ie10-viewport-bug-workaround.js') }}"></script>
-<script src="{{ asset('js/zx.js') }}"></script>
 <script>
     $.ajaxSetup({
         headers: {
