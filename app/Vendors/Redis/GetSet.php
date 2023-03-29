@@ -31,9 +31,9 @@ class GetSet extends Base
      * 获取值
      *
      * @param $key
-     * @return array
+     * @return mixed|string|null
      */
-    public function get($key): array
+    public function get($key): mixed
     {
         $key = $this->getKey($key);
         return $this->redis->get($key);

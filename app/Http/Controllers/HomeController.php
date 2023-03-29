@@ -7,18 +7,15 @@ use App\Models\Article;
 use App\Models\Guestbook;
 use App\Models\Tag;
 use App\Services\CommentService;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     /**
      * @param Request $request
-     * @return Factory|View
+     * @return string
      */
-    public function index(Request $request): View|Factory
+    public function index(Request $request): string
     {
         $articles = Article::query()
             ->where('is_show', 1)
@@ -32,9 +29,9 @@ class HomeController extends Controller
 
     /**
      * @param $slug
-     * @return Factory|View
+     * @return string
      */
-    public function category($slug): View|Factory
+    public function category($slug): string
     {
         $articles = Article::query()
             ->with(['tags' => function ($query) {
@@ -50,9 +47,9 @@ class HomeController extends Controller
 
     /**
      * @param Tag $tag
-     * @return Application|Factory|View
+     * @return string
      */
-    public function tag(Tag $tag): View|Factory|Application
+    public function tag(Tag $tag): string
     {
         $articles = $tag->articles()
             ->with(['tags' => function ($query) {
@@ -67,9 +64,9 @@ class HomeController extends Controller
     /**
      * 关于
      * @param CommentService $commentService
-     * @return Factory|View
+     * @return string
      */
-    public function about(CommentService $commentService): View|Factory
+    public function about(CommentService $commentService): string
     {
         $abouts = About::query()->where('is_enable', 1)->withCount(['comments' => function ($query) {
             $query->where('is_audited', 1);
@@ -86,9 +83,9 @@ class HomeController extends Controller
 
     /**
      * @param CommentService $commentService
-     * @return Factory|View
+     * @return string
      */
-    public function guestbook(CommentService $commentService): View|Factory
+    public function guestbook(CommentService $commentService): string
     {
         $guestbook = Guestbook::query()->withCount(['comments' => function ($query) {
             $query->where('is_audited', 1);

@@ -7,18 +7,18 @@ namespace App\Vendors\Redis;
 use Illuminate\Cache\Repository;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Redis\Connections\Connection;
+use Illuminate\Redis\Connections\PredisConnection;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Redis;
-use Predis\Client;
 use Psr\SimpleCache\InvalidArgumentException;
 
 abstract class Base
 {
 
     /**
-     * @var Client|Store
+     * @var PredisConnection|Store
      */
-    protected Client|Store $redis;
+    protected PredisConnection|Store $redis;
 
     /**
      * @var string 空间
@@ -56,7 +56,7 @@ abstract class Base
      * @param null $store
      * @return Connection|null
      */
-    protected function getRedis($store = null): ?Connection
+    protected function getRedis($store = null)
     {
         return $store ? $store : Redis::connection($this->db);
     }
