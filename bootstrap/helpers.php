@@ -76,3 +76,25 @@ if (!function_exists('i_view')) {
         return mini_html($view);
     }
 }
+
+if (!function_exists('unlimited_for_layer')) {
+    /**
+     * @param $array
+     * @param $id
+     * @param $level
+     * @param $parentId
+     * @return array
+     */
+    function unlimited_for_layer($array, $id = 0, $level = 0, $parentId = 'parent_id')
+    {
+        $list = array();
+        foreach ($array as $k => $v) {
+            if ($v[$parentId] == $id) {
+                $v['level'] = $level;
+                $v['children'] = unlimited_for_layer($array, $v['id'], $level + 1);
+                $list[] = $v;
+            }
+        }
+        return $list;
+    }
+}

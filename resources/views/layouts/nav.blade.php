@@ -9,14 +9,24 @@
         <div class="collapse navbar-collapse" id="bs-navbar-collapse">
             <ul class="nav navbar-nav top-navbar-nav">
                 <li class="{{ request()->is('/') ? 'active' : '' }}"><a href="{{ route('home.index') }}">首页</a></li>
-                {{--                <li><a href="https://www.ewayee.com/sitemap.html">地图</a></li>--}}
 
-                @foreach($categories as $slug => $category)
-                    <li class="{{ request()->is('category/' . $slug) ? 'active' : '' }}" >
-                        <a href="{{ route('home.index_category', ['category' => $slug]) }}">{{ $category }}</a>
+                @foreach($categories as  $category)
+                    <li class="{{ request()->is('category/' . $category->slug) || request()->is(array_map(fn($item) => 'category/' . $item->slug, $category->children)) ? 'active' : '' }}  dropdown">
+                        @if(count($category->children) > 0)
+                            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">{{ $category->name }} <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                @foreach($category->children as $childItem)
+                                    <li>
+                                        <a href="{{ route('home.index_category', ['category' => $childItem->slug]) }}">{{ $childItem->name }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @else
+                            <a href="{{ route('home.index_category', ['category' => $category->slug]) }}">{{ $category->name }}</a>
+                        @endif
+
                     </li>
                 @endforeach
-
 
                 <li class="{{ request()->is('about*') ? 'active' : '' }}"><a href="{{ route('home.about') }}">关于</a>
                 </li>
