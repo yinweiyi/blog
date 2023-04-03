@@ -29,6 +29,7 @@ class StoreCommentRequest extends FormRequest
     }
 
 
+
     /**
      * @return array
      */

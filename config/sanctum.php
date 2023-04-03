@@ -46,7 +46,7 @@ return [
     |
     */
 
-    'expiration' => null,
+    'expiration' => 10080,
 
     /*
     |--------------------------------------------------------------------------
@@ -64,4 +64,14 @@ return [
         'encrypt_cookies' => App\Http\Middleware\EncryptCookies::class,
     ],
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Sanctum Token
+    |--------------------------------------------------------------------------
+    |
+    | Default token name for project
+    |
+    */
+    'token_name' => 'default'
 ];

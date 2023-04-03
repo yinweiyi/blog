@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ArticleController;
-use App\Http\Controllers\CaptchaController;
-use App\Http\Controllers\CommentController;
+use App\Http\Controllers\Frontend\ArticleController;
+use App\Http\Controllers\Frontend\CaptchaController;
+use App\Http\Controllers\Frontend\CommentController;
+use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
