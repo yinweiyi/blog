@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Backend\AdministratorController;
 use App\Http\Controllers\Backend\AuthController;
+use App\Http\Controllers\Backend\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,11 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'admin'], function () {
     Route::post('/auth/login', [AuthController::class, 'login']);
 
-
-    Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-        return $request->user();
+    Route::group(['middleware' => ['auth:sanctum']], function () {
+        Route::get('/dashboard', [HomeController::class, 'dashboard']);
+        Route::get('/administrator/info', [AdministratorController::class, 'info']);
     });
 });
-
-
-

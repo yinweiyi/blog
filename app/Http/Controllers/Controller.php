@@ -19,7 +19,7 @@ class Controller extends BaseController
      * @param array $data
      * @return JsonResponse
      */
-    protected function success($message, $data = []): JsonResponse
+    protected function success($message, array $data = []): JsonResponse
     {
         return $this->response(200, $message, $data);
     }
@@ -31,7 +31,7 @@ class Controller extends BaseController
      * @param array $data
      * @return JsonResponse
      */
-    protected function error($message, $data = []): JsonResponse
+    protected function error($message, array $data = []): JsonResponse
     {
         return $this->response(400, $message, $data);
     }

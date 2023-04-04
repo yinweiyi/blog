@@ -29,6 +29,6 @@ class AuthController extends Controller
 
         LoginedEvent::dispatch($administrator);
 
-        return $this->success($token);
+        return $this->success('登录成功', compact('token'));
     }
 }

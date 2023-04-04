@@ -1,7 +1,24 @@
 <?php
 
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
+
+if (!function_exists('human_filesize')) {
+
+    /**
+     * 格式化容量为易读字符串
+     *
+     * @param int $bytes
+     * @param int $decimals
+     * @return string
+     */
+    function human_filesize(int $bytes, int $decimals = 2): string
+    {
+        $sz = 'BKMGTP';
+        $factor = floor((strlen($bytes) - 1) / 3);
+
+        return sprintf("%.{$decimals}f ", $bytes / pow(1024, $factor)) . @$sz[$factor];
+    }
+
+}
 
 if (!function_exists('random_color')) {
     /**

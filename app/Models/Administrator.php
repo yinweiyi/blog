@@ -17,6 +17,8 @@ class Administrator extends Authenticatable
         'name', 'account', 'password', 'last_login_ip', 'last_login_at'
     ];
 
+    protected $hidden = ['password'];
+
     /**
      * Create a new factory instance for the model.
      *
