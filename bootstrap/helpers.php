@@ -112,12 +112,12 @@ if (!function_exists('i_view')) {
 if (!function_exists('unlimited_for_layer')) {
     /**
      * @param $array
-     * @param $id
-     * @param $level
-     * @param $parentId
+     * @param int $id
+     * @param int $level
+     * @param string $parentId
      * @return array
      */
-    function unlimited_for_layer($array, $id = 0, $level = 0, $parentId = 'parent_id')
+    function unlimited_for_layer($array, int $id = 0, int $level = 0, string $parentId = 'parent_id'): array
     {
         $list = array();
         foreach ($array as $k => $v) {

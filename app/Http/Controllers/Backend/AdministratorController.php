@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AdministratorLoginRequest;
 use App\Http\Requests\StoreAdministratorRequest;
 use App\Models\Administrator;
 use Illuminate\Http\JsonResponse;
@@ -97,7 +96,7 @@ class AdministratorController extends Controller
     /**
      * Info
      *
-     * @param AdministratorLoginRequest $request
+     * @param Request $request
      * @return JsonResponse
      */
     public function info(Request $request): JsonResponse
