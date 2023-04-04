@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function dashboard(): JsonResponse
     {
-        return $this->success(null, [
+        return $this->success([
             'systems' => $this->systems(),
             'frameworks' => $this->frameworks(),
             'extends' => $this->extends(),

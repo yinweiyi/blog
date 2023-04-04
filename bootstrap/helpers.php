@@ -20,6 +20,21 @@ if (!function_exists('human_filesize')) {
 
 }
 
+if (!function_exists('array_filter_null')) {
+    /**
+     * 移除数组null
+     *
+     * @param array $array
+     * @return array
+     */
+    function array_filter_null(array $array = []): array
+    {
+        return array_filter($array, function ($item) {
+            return !is_null($item);
+        });
+    }
+}
+
 if (!function_exists('random_color')) {
     /**
      * 随机颜色

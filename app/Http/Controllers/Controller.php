@@ -15,11 +15,11 @@ class Controller extends BaseController
     /**
      * return success message
      *
-     * @param $message
      * @param array $data
+     * @param string $message
      * @return JsonResponse
      */
-    protected function success($message, array $data = []): JsonResponse
+    protected function success(array $data = [], string $message = '成功'): JsonResponse
     {
         return $this->response(200, $message, $data);
     }
