@@ -18,11 +18,11 @@ class AdministratorController extends Controller
      *
      * @return JsonResponse
      */
-    public function index(): JsonResponse
+    public function list(): JsonResponse
     {
-        $administrators = Administrator::query()->orderByDesc('id')->get();
+        $administrators = Administrator::query()->orderByDesc('id')->paginate();
 
-        return $this->success($administrators);
+        return $this->success($this->toPageData($administrators));
     }
 
     /**
@@ -51,7 +51,7 @@ class AdministratorController extends Controller
     {
         $request->validate([
             'name'     => ['bail', 'required'],
-            'account'  => ['bail', 'required', Rule::unique('administrator', 'account')->ignore($administrator->getAuthIdentifier())],
+            'account'  => ['bail', 'required', Rule::unique('administrators', 'account')->ignore($administrator->getAuthIdentifier())],
             'password' => ['bail', 'confirmed'],
             'status'   => ['bail', 'required', 'boolean']
         ], [
@@ -66,6 +66,17 @@ class AdministratorController extends Controller
         $attributes = $request->post();
         $administrator->fill(array_filter_null($attributes))->save();
         return $this->success();
+    }
+
+    /**
+     * 删除
+     *
+     * @param Administrator $administrator
+     * @return JsonResponse
+     */
+    public function detail(Administrator $administrator): JsonResponse
+    {
+        return $this->success($administrator);
     }
 
     /**

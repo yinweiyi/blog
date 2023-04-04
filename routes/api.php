@@ -23,10 +23,11 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::group(['prefix' => 'administrator'], function (){
             Route::get('/info', [AdministratorController::class, 'info']);
-            Route::get('/index', [AdministratorController::class, 'index']);
+            Route::get('/list', [AdministratorController::class, 'list']);
+            Route::get('/{administrator}', [AdministratorController::class, 'detail'])->where('administrator', '[0-9]+');
             Route::post('/store', [AdministratorController::class, 'store']);
-            Route::post('/{administrator}/update', [AdministratorController::class, 'update']);
-            Route::delete('/{administrator}', [AdministratorController::class, 'delete']);
+            Route::post('/{administrator}/update', [AdministratorController::class, 'update'])->where('administrator', '[0-9]+');
+            Route::delete('/{administrator}', [AdministratorController::class, 'delete'])->where('administrator', '[0-9]+');
         });
     });
 });

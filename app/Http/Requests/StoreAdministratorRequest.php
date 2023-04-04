@@ -17,7 +17,7 @@ class StoreAdministratorRequest extends FormRequest
     {
         return [
             'name'     => ['bail', 'required'],
-            'account'  => ['bail', 'required', Rule::unique('administrator', 'account')],
+            'account'  => ['bail', 'required', Rule::unique('administrators', 'account')],
             'password' => ['bail', 'required', 'confirmed'],
             'status'   => ['bail', 'required', 'boolean']
         ];

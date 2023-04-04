@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -13,13 +14,27 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     /**
+     * LengthAwarePaginator to useful page data
+     *
+     * @param LengthAwarePaginator $paginator
+     * @return array
+     */
+    protected function toPageData(LengthAwarePaginator $paginator): array
+    {
+        return [
+            'list'  => $paginator->items(),
+            'total' => $paginator->total()
+        ];
+    }
+
+    /**
      * return success message
      *
-     * @param array $data
+     * @param  $data
      * @param string $message
      * @return JsonResponse
      */
-    protected function success(array $data = [], string $message = '成功'): JsonResponse
+    protected function success($data = null, string $message = '成功'): JsonResponse
     {
         return $this->response(200, $message, $data);
     }
