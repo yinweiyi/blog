@@ -1,10 +1,10 @@
-@if(!$friendshipLinks->isEmpty())
+@if(!$friendships->isEmpty())
     <div class="panel panel-default">
         <div class="panel-heading">友情链接</div>
 
         <table class="table friendship-link">
             <tbody>
-            @foreach($friendshipLinks as $links )
+            @foreach($friendships as $links )
                 <tr>
                     @foreach($links as $link)
                         <td><a href="{{ $link->link }}" title="{{ $link->title }}"

@@ -44,7 +44,7 @@
             @include('layouts.tags')
             @include('layouts.hots')
             @include('layouts.newest_comments')
-            @include('layouts.friendship_links')
+            @include('layouts.friendships')
         </div>
     </div><!-- /.row -->
 @endsection

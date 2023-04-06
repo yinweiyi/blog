@@ -13,12 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('friendship_links', function (Blueprint $table) {
+        Schema::create('friendships', function (Blueprint $table) {
             $table->increments('id')->comment('主键');
             $table->string('title', 100)->default('')->comment('标题');
             $table->string('link', 100)->default('')->comment('链接');
             $table->string('description')->nullable()->comment('描述');
-            $table->unsignedTinyInteger('is_enable')->default(0)->comment('是否开启');
+            $table->unsignedTinyInteger('status')->default(1)->comment('是否开启');
+            $table->unsignedInteger('order')->unsigned()->default(0)->comment('排序');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('friendship_links');
+        Schema::dropIfExists('friendships');
     }
 };

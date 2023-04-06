@@ -17,7 +17,7 @@ class CategoryController extends Controller
      */
     public function list(): JsonResponse
     {
-        $categories = Category::query()->orderBy('order')->get();
+        $categories = Category::query()->orderByDesc('order')->get();
 
         return $this->success(unlimited_for_layer($categories));
     }

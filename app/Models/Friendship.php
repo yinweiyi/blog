@@ -6,11 +6,12 @@ use App\Models\Traits\HasDateTimeFormatter;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
-class FriendshipLink extends Model
+class Friendship extends Model
 {
-	use HasDateTimeFormatter;
+    use HasDateTimeFormatter;
     use SoftDeletes;
 
-    protected $table = 'friendship_links';
+    protected $casts = ['status' => 'boolean'];
 
+    protected $fillable = ['title', 'link', 'status', 'order', 'description'];
 }

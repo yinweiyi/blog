@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\TagController;
 use App\Http\Controllers\Backend\HomeController;
+use App\Http\Controllers\Backend\FriendshipController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,6 +49,15 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/store', [TagController::class, 'store']);
             Route::post('/{tag}/update', [TagController::class, 'update'])->where('tag', '[0-9]+');
             Route::delete('/{tag}', [TagController::class, 'delete'])->where('tag', '[0-9]+');
+        });
+
+        Route::group(['prefix' => 'friendship'], function (){
+            Route::get('/list', [FriendshipController::class, 'list']);
+            Route::get('/{friendship}', [FriendshipController::class, 'detail'])->where('friendship', '[0-9]+');
+            Route::post('/store', [FriendshipController::class, 'store']);
+            Route::post('/{friendship}/update', [FriendshipController::class, 'update'])->where('friendship', '[0-9]+');
+            Route::post('/{friendship}/update-status', [FriendshipController::class, 'updateStatus'])->where('friendship', '[0-9]+');
+            Route::delete('/{friendship}', [FriendshipController::class, 'delete'])->where('friendship', '[0-9]+');
         });
 
         Route::group(['prefix' => 'setting'], function (){

@@ -16,7 +16,7 @@ class CategoriesComposer
      */
     public function compose(View $view)
     {
-        $categories = Category::query()->orderBy('order')->select('id', 'parent_id', 'name', 'slug')->get();
+        $categories = Category::query()->orderByDesc('order')->select('id', 'parent_id', 'name', 'slug')->get();
         $categories = unlimited_for_layer($categories);
         $view->with('categories', $categories);
     }
