@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\AdministratorController;
 use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\SentenceController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\TagController;
 use App\Http\Controllers\Backend\HomeController;
@@ -63,6 +64,14 @@ Route::group(['prefix' => 'admin'], function () {
         Route::group(['prefix' => 'setting'], function (){
             Route::get('/{key}', [SettingController::class, 'info']);
             Route::post('/{key}/update', [SettingController::class, 'update']);
+        });
+
+        Route::group(['prefix' => 'sentence'], function (){
+            Route::get('/list', [SentenceController::class, 'list']);
+            Route::get('/{sentence}', [SentenceController::class, 'detail'])->where('sentence', '[0-9]+');
+            Route::post('/store', [SentenceController::class, 'store']);
+            Route::post('/{sentence}/update', [SentenceController::class, 'update'])->where('sentence', '[0-9]+');
+            Route::delete('/{sentence}', [SentenceController::class, 'delete'])->where('sentence', '[0-9]+');
         });
     });
 });
