@@ -12,6 +12,10 @@ class Tag extends Model
     use HasDateTimeFormatter;
     use SoftDeletes;
 
+    protected $fillable = [
+        'name', 'slug', 'order', 'description'
+    ];
+
     /**
      * @return BelongsToMany
      */

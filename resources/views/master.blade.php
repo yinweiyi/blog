@@ -7,11 +7,11 @@
           content="width=device-width, initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
     <meta name="baidu-site-verification" content="code-dn39zmbxqg"/>
     <link rel="icon" href="/favicon.ico">
-    <meta name="author" content="{{ $configs['author'] ?? '' }}">
+    <meta name="author" content="{{ $site['author'] ?? '' }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', $configs['title'] ?? '') | {{$configs['sub_title'] ?? ''}}</title>
-    <meta name="keywords" content="{{ $configs['keywords'] ?? '' }},@yield('keywords', '')">
-    <meta name="description" content="{{ $configs['description'] ?? '' }}">
+    <title>@yield('title', $site['title'] ?? '') | {{$site['sub_title'] ?? ''}}</title>
+    <meta name="keywords" content="{{ $site['keywords'] ?? '' }},@yield('keywords', '')">
+    <meta name="description" content="{{ $site['description'] ?? '' }}">
     <link href="{{ asset('css/ie10-viewport-bug-workaround.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     @yield('css')

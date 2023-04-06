@@ -15,11 +15,12 @@ class AdministratorController extends Controller
     /**
      * 列表
      *
+     * @param Request $request
      * @return JsonResponse
      */
-    public function list(): JsonResponse
+    public function list(Request $request): JsonResponse
     {
-        $administrators = Administrator::query()->orderByDesc('id')->paginate();
+        $administrators = Administrator::query()->orderByDesc('id')->paginate($request->input('pageSize'));
 
         return $this->success($this->toPageData($administrators));
     }

@@ -3,10 +3,10 @@
 
 namespace App\Http\ViewComposers;
 
-use App\Models\Config;
+use App\Models\Setting;
 use Illuminate\View\View;
 
-class ConfigsComposer
+class SettingComposer
 {
     /**
      * Bind data to the view.
@@ -16,6 +16,8 @@ class ConfigsComposer
      */
     public function compose(View $view): void
     {
-        $view->with('configs', Config::query()->first());
+        //todo cache
+        $setting = Setting::query()->where('key', 'site')->first();
+        $view->with('site', $setting->value);
     }
 }

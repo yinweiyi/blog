@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
+use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Http\JsonResponse;
 
@@ -63,7 +64,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * 删除
+     * 详情
      *
      * @param Category $category
      * @return JsonResponse
@@ -81,10 +82,16 @@ class CategoryController extends Controller
      */
     public function delete(Category $category): JsonResponse
     {
-        $exists = Category::query()->where('parent_id', $category->getAttribute('id'))->exists();
-        if ($exists) {
+        $existsChildren = Category::query()->where('parent_id', $category->getAttribute('id'))->exists();
+        if ($existsChildren) {
             return $this->error('包含子类，不可删除');
         }
+
+        $existsArticle = Article::query()->where('category_id', $category->id)->exists();
+        if ($existsArticle) {
+            return $this->error('此分类绑定了文章，不可删除');
+        }
+
         $category->delete();
         return $this->success();
     }
