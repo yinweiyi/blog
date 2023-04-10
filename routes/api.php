@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\TagController;
 use App\Http\Controllers\Backend\HomeController;
 use App\Http\Controllers\Backend\FriendshipController;
+use App\Http\Controllers\Backend\ArticleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,10 +49,19 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::group(['prefix' => 'tag'], function (){
             Route::get('/list', [TagController::class, 'list']);
-            Route::get('/{tag}', [TagController::class, 'detail'])->where('tag', '[0-9]+');
+            Route::get('/all', [TagController::class, 'all']);
             Route::post('/store', [TagController::class, 'store']);
             Route::post('/{tag}/update', [TagController::class, 'update'])->where('tag', '[0-9]+');
             Route::delete('/{tag}', [TagController::class, 'delete'])->where('tag', '[0-9]+');
+        });
+
+        Route::group(['prefix' => 'article'], function (){
+            Route::get('/list', [ArticleController::class, 'list']);
+            Route::get('/{article}', [ArticleController::class, 'detail'])->where('article', '[0-9]+');
+            Route::post('/store', [ArticleController::class, 'store']);
+            Route::post('/{article}/update', [ArticleController::class, 'update'])->where('article', '[0-9]+');
+            Route::post('/{article}/update-status', [ArticleController::class, 'updateStatus'])->where('article', '[0-9]+');
+            Route::delete('/{article}', [ArticleController::class, 'delete'])->where('article', '[0-9]+');
         });
 
         Route::group(['prefix' => 'friendship'], function (){

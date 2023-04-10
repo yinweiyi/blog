@@ -16,12 +16,22 @@ class Article extends Model
     use SoftDeletes;
 
 
+    protected $fillable = [
+        'title', 'slug', 'author', 'content_type', 'markdown', 'html', 'description', 'keywords', 'is_top',
+        'is_show', 'views', 'order', 'category_id'
+    ];
+
+    protected $casts = [
+        'is_top' => 'boolean',
+        'is_show' => 'boolean',
+    ];
+
     /**
      * 关联标签
      *
      * @return BelongsToMany
      */
-    public function tags()
+    public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class);
     }
@@ -31,7 +41,7 @@ class Article extends Model
      *
      * @return BelongsTo
      */
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
@@ -41,7 +51,7 @@ class Article extends Model
      *
      * @return MorphMany
      */
-    public function comments()
+    public function comments(): MorphMany
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
@@ -51,7 +61,7 @@ class Article extends Model
      *
      * @return string
      */
-    public function stripTagHtml()
+    public function stripTagHtml(): string
     {
         $stripTagsHtml = strip_tags($this->attributes['html']);
 

@@ -18,10 +18,10 @@ class ArticleController extends Controller
      * @param $slug
      * @return Application|Factory|View
      */
-    public function show(CommentService $commentService, $slug)
+    public function show(CommentService $commentService, $slug): Factory|View|Application
     {
         $article = Article::query()->where('is_show', 1)
-            ->select(['id', 'slug', 'title', 'author', 'keywords', 'html', 'views', 'category_id', 'created_at'])
+            ->select(['id', 'slug', 'title', 'author', 'content_type', 'keywords', 'markdown', 'html', 'views', 'category_id', 'created_at'])
             ->with(['category' => function ($query) {
                 $query->select(['id', 'slug', 'name']);
             }])->withCount(['comments' => function ($query) {

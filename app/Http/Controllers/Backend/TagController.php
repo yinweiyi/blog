@@ -18,9 +18,21 @@ class TagController extends Controller
      */
     public function list(Request $request): JsonResponse
     {
-        $tags = Tag::query()->orderBy('order')->paginate($request->input('pageSize'));
+        $tags = Tag::query()->orderByDesc('order')->paginate($request->input('pageSize'));
 
         return $this->success($this->toPageData($tags));
+    }
+
+    /**
+     * 列表
+     *
+     * @return JsonResponse
+     */
+    public function all(): JsonResponse
+    {
+        $tags = Tag::query()->orderByDesc('order')->get();
+
+        return $this->success($tags);
     }
 
     /**
