@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-8 blog-main">
             <div id="article" class="well">
-                {!! $guestbook->html ?? '欢迎灌水交流，别看我长时间不发博，博主可一直都在线~' !!}
+                {!! $guestbook->value['content'] ?? '欢迎灌水交流，别看我长时间不发博，博主可一直都在线~' !!}
             </div><!-- /.blog-main -->
 
             @if($guestbook)
@@ -17,7 +17,7 @@
                         </div>
                     @endif
 
-                    @if($guestbook->can_comment)
+                    @if($guestbook->value['can_comment'] ?? false)
                         @include('layouts.comment', ['id' => $guestbook->id, 'type' => 'guestbook'])
                     @endif
                 </div>

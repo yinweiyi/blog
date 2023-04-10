@@ -35,8 +35,7 @@ class Comment extends Model
 
     const Types = [
         'article'   => Article::class,
-        'about'     => About::class,
-        'guestbook' => Guestbook::class,
+        'guestbook' => Setting::class,
     ];
 
     protected string $titleColumn = 'content';

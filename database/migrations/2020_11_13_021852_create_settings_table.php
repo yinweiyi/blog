@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('settings', function (Blueprint $table) {
-            $table->string('key')->primary()->comment('key');
+            $table->increments('id')->comment('主键');
+            $table->string('key')->comment('key');
             $table->text('value')->comment('value');
             $table->timestamps();
         });

@@ -9,6 +9,12 @@ use Illuminate\Http\JsonResponse;
 
 class CommentController extends Controller
 {
+    /**
+     * 保存
+     *
+     * @param StoreCommentRequest $request
+     * @return JsonResponse
+     */
     public function store(StoreCommentRequest $request): JsonResponse
     {
         $model = Comment::Types[$request->type];
@@ -19,7 +25,7 @@ class CommentController extends Controller
         $attributes = $request->only(['parent_id', 'content', 'nickname', 'email']);
 
         if ($attributes['parent_id'] > 0) {
-            $parent = Comment::query()->where(['commentable_id' => $article->id, 'commentable_type' => get_class($article)])->find($attributes['parent_id']);
+            $parent = Comment::query()->where(['commentable_id' => $article->getKey(), 'commentable_type' => get_class($article)])->find($attributes['parent_id']);
             if (is_null($parent)) return $this->error('要回复的评论不存在');
             $attributes['top_id'] = $parent->top_id ?: $parent->id;
         }

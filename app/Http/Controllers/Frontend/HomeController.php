@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\About;
 use App\Models\Article;
 use App\Models\Guestbook;
+use App\Models\Setting;
 use App\Models\Tag;
 use App\Services\CommentService;
 use Illuminate\Http\Request;
@@ -24,7 +25,7 @@ class HomeController extends Controller
                 $query->select(['id', 'slug', 'name']);
             }])
             ->orderByRaw('is_top desc, id desc')
-            ->paginate(7, ['id', 'title','slug', 'author', 'html', 'views', 'created_at']);
+            ->paginate(7, ['id', 'title', 'slug', 'author', 'html', 'views', 'created_at']);
         return i_view('home.index', compact('articles'));
     }
 
@@ -42,7 +43,7 @@ class HomeController extends Controller
                 return $query->where('slug', $slug);
             })
             ->orderByRaw('is_top desc, id desc')
-            ->paginate(7, ['id', 'title','slug', 'author', 'html', 'views', 'created_at']);
+            ->paginate(7, ['id', 'title', 'slug', 'author', 'html', 'views', 'created_at']);
         return i_view('home.index', compact('articles'));
     }
 
@@ -57,29 +58,8 @@ class HomeController extends Controller
                 $query->select(['id', 'slug', 'name']);
             }])
             ->orderByRaw('is_top desc, id desc')
-            ->paginate(7, ['id', 'title','slug', 'author', 'html', 'views', 'created_at']);
+            ->paginate(7, ['id', 'title', 'slug', 'author', 'html', 'views', 'created_at']);
         return i_view('home.index', compact('articles'));
-    }
-
-
-    /**
-     * 关于
-     * @param CommentService $commentService
-     * @return string
-     */
-    public function about(CommentService $commentService): string
-    {
-        $abouts = About::query()->where('is_enable', 1)->withCount(['comments' => function ($query) {
-            $query->where('is_audited', 1);
-        }])->orderBy('order')->get();
-
-        $comments = null;
-        if ($abouts->count()) {
-            $comments = $commentService->treeFromArticle($abouts->first());
-        }
-
-
-        return i_view('home.about', compact('abouts', 'comments'));
     }
 
     /**
@@ -88,7 +68,7 @@ class HomeController extends Controller
      */
     public function guestbook(CommentService $commentService): string
     {
-        $guestbook = Guestbook::query()->withCount(['comments' => function ($query) {
+        $guestbook = Setting::query()->where('key', 'guestbook')->withCount(['comments' => function ($query) {
             $query->where('is_audited', 1);
         }])->first();
 
@@ -96,6 +76,7 @@ class HomeController extends Controller
         if (!is_null($guestbook)) {
             $comments = $commentService->treeFromArticle($guestbook);
         }
+
         return i_view('home.guestbook', compact('guestbook', 'comments'));
     }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\AdministratorController;
 use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\FileController;
 use App\Http\Controllers\Backend\SentenceController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\TagController;
@@ -25,6 +26,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('/dashboard', [HomeController::class, 'dashboard']);
+        Route::post('/file/upload', [FileController::class, 'upload']);
 
         Route::group(['prefix' => 'administrator'], function (){
             Route::get('/info', [AdministratorController::class, 'info']);

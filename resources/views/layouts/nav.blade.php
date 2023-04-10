@@ -28,10 +28,9 @@
                     </li>
                 @endforeach
 
-                <li class="{{ request()->is('about*') ? 'active' : '' }}"><a href="{{ route('home.about') }}">关于</a>
+                <li class="{{ request()->is('guestbook*') ? 'active' : '' }}">
+                    <a href="{{ route('home.guestbook') }}">留言</a>
                 </li>
-                <li class="{{ request()->is('guestbook*') ? 'active' : '' }}"><a
-                        href="{{ route('home.guestbook') }}">留言</a></li>
             </ul>
             {{--            <form id="search-form" class="navbar-form navbar-right" role="search" target="_blank"--}}
             {{--                  action="{{ route('home.index') }}" method="get">--}}
