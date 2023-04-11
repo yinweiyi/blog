@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\AdministratorController;
 use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\CommentController;
 use App\Http\Controllers\Backend\FileController;
 use App\Http\Controllers\Backend\SentenceController;
 use App\Http\Controllers\Backend\SettingController;
@@ -29,7 +30,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/dashboard', [HomeController::class, 'dashboard']);
         Route::post('/file/upload', [FileController::class, 'upload']);
 
-        Route::group(['prefix' => 'administrator'], function (){
+        Route::group(['prefix' => 'administrator'], function () {
             Route::get('/info', [AdministratorController::class, 'info']);
             Route::get('/list', [AdministratorController::class, 'list']);
             Route::get('/{administrator}', [AdministratorController::class, 'detail'])->where('administrator', '[0-9]+');
@@ -38,7 +39,7 @@ Route::group(['prefix' => 'admin'], function () {
             Route::delete('/{administrator}', [AdministratorController::class, 'delete'])->where('administrator', '[0-9]+');
         });
 
-        Route::group(['prefix' => 'category'], function (){
+        Route::group(['prefix' => 'category'], function () {
             Route::get('/list', [CategoryController::class, 'list']);
             Route::get('/parents', [CategoryController::class, 'parents']);
             Route::get('/{category}', [CategoryController::class, 'detail'])->where('category', '[0-9]+');
@@ -47,7 +48,7 @@ Route::group(['prefix' => 'admin'], function () {
             Route::delete('/{category}', [CategoryController::class, 'delete'])->where('category', '[0-9]+');
         });
 
-        Route::group(['prefix' => 'tag'], function (){
+        Route::group(['prefix' => 'tag'], function () {
             Route::get('/list', [TagController::class, 'list']);
             Route::get('/all', [TagController::class, 'all']);
             Route::post('/store', [TagController::class, 'store']);
@@ -55,7 +56,7 @@ Route::group(['prefix' => 'admin'], function () {
             Route::delete('/{tag}', [TagController::class, 'delete'])->where('tag', '[0-9]+');
         });
 
-        Route::group(['prefix' => 'article'], function (){
+        Route::group(['prefix' => 'article'], function () {
             Route::get('/list', [ArticleController::class, 'list']);
             Route::get('/{article}', [ArticleController::class, 'detail'])->where('article', '[0-9]+');
             Route::post('/store', [ArticleController::class, 'store']);
@@ -64,7 +65,7 @@ Route::group(['prefix' => 'admin'], function () {
             Route::delete('/{article}', [ArticleController::class, 'delete'])->where('article', '[0-9]+');
         });
 
-        Route::group(['prefix' => 'friendship'], function (){
+        Route::group(['prefix' => 'friendship'], function () {
             Route::get('/list', [FriendshipController::class, 'list']);
             Route::get('/{friendship}', [FriendshipController::class, 'detail'])->where('friendship', '[0-9]+');
             Route::post('/store', [FriendshipController::class, 'store']);
@@ -73,17 +74,22 @@ Route::group(['prefix' => 'admin'], function () {
             Route::delete('/{friendship}', [FriendshipController::class, 'delete'])->where('friendship', '[0-9]+');
         });
 
-        Route::group(['prefix' => 'setting'], function (){
+        Route::group(['prefix' => 'setting'], function () {
             Route::get('/{key}', [SettingController::class, 'info']);
             Route::post('/{key}/update', [SettingController::class, 'update']);
         });
 
-        Route::group(['prefix' => 'sentence'], function (){
+        Route::group(['prefix' => 'sentence'], function () {
             Route::get('/list', [SentenceController::class, 'list']);
             Route::get('/{sentence}', [SentenceController::class, 'detail'])->where('sentence', '[0-9]+');
             Route::post('/store', [SentenceController::class, 'store']);
             Route::post('/{sentence}/update', [SentenceController::class, 'update'])->where('sentence', '[0-9]+');
             Route::delete('/{sentence}', [SentenceController::class, 'delete'])->where('sentence', '[0-9]+');
+        });
+
+        Route::group(['prefix' => 'comment'], function () {
+            Route::get('/list', [CommentController::class, 'list']);
+            Route::post('/reply', [CommentController::class, 'reply']);
         });
     });
 });

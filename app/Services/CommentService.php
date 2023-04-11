@@ -8,7 +8,6 @@
 
 namespace App\Services;
 
-
 use App\Models\Comment;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -20,15 +19,15 @@ class CommentService
     /**
      *
      * @param Model $model
+     * @param int $perPage
      * @return LengthAwarePaginator
      */
-    public function treeFromArticle(Model $model): LengthAwarePaginator
+    public function treeFromArticle(Model $model, int $perPage = 5): LengthAwarePaginator
     {
         $fields = ['id', 'parent_id', 'content', 'avatar', 'nickname', 'email', 'commentable_id', 'commentable_type', 'is_admin_reply', 'top_id', 'created_at'];
 
-        $comments = $model->comments()
-            ->where(['top_id' => 0, 'is_audited' => 1])
-            ->orderByDesc('id')->paginate(5, $fields, 'comment-page');
+        $comments = $model->comments()->where(['top_id' => 0, 'is_audited' => 1])
+            ->orderByDesc('id')->paginate($perPage, $fields);
         if ($comments->isEmpty()) return $comments;
 
         $topIds = $comments->pluck('id')->unique();
@@ -41,7 +40,7 @@ class CommentService
 
         $unlimitedComments = $this->unlimitedForLayer($allComments->toArray());
 
-        return new LengthAwarePaginator($unlimitedComments, $comments->total(), 5, $comments->currentPage(), [
+        return new LengthAwarePaginator($unlimitedComments, $comments->total(), $perPage, $comments->currentPage(), [
             'path'     => Paginator::resolveCurrentPath(),
             'fragment' => 'comments',
             'pageName' => 'comment-page'
