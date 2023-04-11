@@ -1,4 +1,4 @@
-## 基于laravel+dcatadmin个人博客
+## 基于laravel+element-plus个人博客
 
 ### 安装
 
