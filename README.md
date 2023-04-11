@@ -27,3 +27,8 @@
 ```shell
     php artisan migrate --seed
 ```
+
+### 软链接
+```shell
+   php artisan storage:link
+```

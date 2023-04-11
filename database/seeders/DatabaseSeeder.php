@@ -2,7 +2,8 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Administrator;
+use App\Models\Setting;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,11 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         \App\Models\Administrator::factory(1)->create();
+         Administrator::factory(1)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+         Setting::query()->insert([
+             ['key' =>'guestbook', 'value' => ['content' => '','can_comment' => true]],
+             ['key' =>'site', 'value' => []],
+         ]);
     }
 }

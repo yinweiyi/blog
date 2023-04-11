@@ -22,7 +22,7 @@ class CommentController extends Controller
      */
     public function list(Request $request, CommentService $commentService): JsonResponse
     {
-        $builder = $request->get('type') === 'articles' ?
+        $builder = $request->get('type') === 'article' ?
             Article::query()->where('id', $request->id) :
             Setting::query()->where('id', $request->id);
 
