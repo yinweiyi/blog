@@ -25,8 +25,8 @@ return new class extends Migration
             $table->string('keywords')->default('')->comment('关键词');
             $table->unsignedTinyInteger('is_top')->default(0)->comment('是否置顶 1是 0否');
             $table->unsignedTinyInteger('is_show')->default(1)->comment('是否显示 1是 0否');
-            $table->unsignedInteger('views')->unsigned()->default(0)->comment('浏览量');
-            $table->unsignedInteger('order')->unsigned()->default(0)->comment('排序');
+            $table->unsignedInteger('views')->default(0)->comment('浏览量');
+            $table->integer('order')->default(0)->comment('排序');
             $table->unsignedInteger('category_id')->unsigned()->default(0)->comment('分类ID');
             $table->timestamps();
             $table->softDeletes();

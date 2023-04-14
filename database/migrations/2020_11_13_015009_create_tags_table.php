@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name', 20)->default('')->comment('标签名');
             $table->string('slug', 50)->unique()->comment('slug');
             $table->string('description')->nullable()->comment('标签的描述');
-            $table->unsignedBigInteger('order')->default(0)->comment('排序');
+            $table->bigInteger('order')->default(0)->comment('排序');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('link', 100)->default('')->comment('链接');
             $table->string('description')->nullable()->comment('描述');
             $table->unsignedTinyInteger('status')->default(1)->comment('是否开启');
-            $table->unsignedInteger('order')->unsigned()->default(0)->comment('排序');
+            $table->integer('order')->unsigned()->default(0)->comment('排序');
             $table->timestamps();
             $table->softDeletes();
         });
