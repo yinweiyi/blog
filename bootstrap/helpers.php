@@ -1,5 +1,16 @@
 <?php
-
+if (!function_exists('app_url')) {
+    /**
+     * APP
+     *
+     * @param string $url
+     * @return string
+     */
+    function app_url(string $url = '/'): string
+    {
+        return $url == '/' ? config('app.url') : config('app.url') . '/' . $url;
+    }
+}
 
 if (!function_exists('human_filesize')) {
 
