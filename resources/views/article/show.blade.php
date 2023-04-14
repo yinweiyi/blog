@@ -26,7 +26,11 @@
                 </p>
                 <hr>
                 <div class="text">
-                    {!! $article->html !!}
+                    @if($article->content_type === 1)
+                        {!! \Illuminate\Support\Str::markdown($article->markdown) !!}
+                    @else
+                        {!! $article->html !!}
+                    @endif
                 </div>
                 <div class="alert alert-success"> &nbsp; &nbsp; &nbsp; &nbsp;
                     <div class="post-copyright">
