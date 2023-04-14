@@ -63,7 +63,11 @@ class Article extends Model
      */
     public function stripTagHtml(): string
     {
-        $stripTagsHtml = strip_tags($this->attributes['html']);
+        $html = $this->attributes['html'];
+        if ($this->attributes['content_type'] === 1) {
+            $html = Str::markdown($this->attributes['markdown']);
+        }
+        $stripTagsHtml = strip_tags($html);
 
         return Str::limit($stripTagsHtml, 415);
     }
