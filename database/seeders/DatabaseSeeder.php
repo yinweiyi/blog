@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
 
          Setting::query()->insert([
              ['key' =>'guestbook', 'value' => \json_encode(['content' => '','can_comment' => true])],
-             ['key' =>'site', 'value' => \json_encode([])],
+             ['key' =>'site', 'value' => ''],
          ]);
     }
 }
