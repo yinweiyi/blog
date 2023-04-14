@@ -20,7 +20,7 @@ class AdministratorFactory extends Factory
         return [
             'name' => 'admin',
             'account' => 'admin',
-            'password' => Hash::make('admin'),
+            'password' => 'admin',
         ];
     }
 
