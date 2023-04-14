@@ -1,0 +1,1 @@
+import{C as o}from"./Comment-47fd3317.js";import{b as t,j as s,o as e}from"./index-121b4ab3.js";import"./usePagination-07b415e6.js";const m=t({name:"ArticleComment"}),a=t({...m,setup:t=>(t,m)=>(e(),s(o,{id:1,type:"guestbook"}))});export{a as default};
