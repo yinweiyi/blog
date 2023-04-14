@@ -1,0 +1,1 @@
+import{b as t,u as s,j as a,o as e}from"./index-aa7cad08.js";import{C as o}from"./Comment-79394280.js";import"./usePagination-e9891ce3.js";const r=t({name:"ArticleComment"}),m=t({...r,setup(t){const r=+s().params.id;return(t,s)=>(e(),a(o,{id:r,type:"article"}))}});export{m as default};
