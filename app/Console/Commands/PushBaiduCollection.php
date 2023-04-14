@@ -24,7 +24,7 @@ class PushBaiduCollection extends Command
      */
     protected $description = 'Push site urls to https://ziyuan.baidu.com/';
 
-    const Url = 'http://data.zz.baidu.com/urls?site=https://www.ewayee.com&token=Z9NOHrweW8GamIfh';
+    const Url = 'http://data.zz.baidu.com/urls?site=https://blog.baigei.com&token=Z9NOHrweW8GamIfh';
 
 
     /**
@@ -35,10 +35,9 @@ class PushBaiduCollection extends Command
     {
         $urls = $this->urls();
         Log::channel('baidu_push')->info('pushing urls to baidu:' . $this->urls()->implode(','));
-        $api = 'http://data.zz.baidu.com/urls?site=https://www.ewayee.com&token=Z9NOHrweW8GamIfh';
         $ch = curl_init();
         $options = array(
-            CURLOPT_URL            => $api,
+            CURLOPT_URL            => self::Url,
             CURLOPT_POST           => true,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POSTFIELDS     => $urls->implode("\n"),
