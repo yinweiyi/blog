@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
         // 只在本地开发环境启用 SQL 日志
         $request = $this->app['request'];
         // 只在本地开发环境启用 SQL 日志
-        if (!app()->environment('product')) {
+        if (!app()->environment('production')) {
             DB::listen(function ($query) use ($request) {
                 Log::info(Str::replaceArray('?', $query->bindings, $query->sql) . ' Times: ' . $query->time . 'ms' . ' Path: ' . $request->path());
             });
