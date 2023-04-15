@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreTagRequest;
 use App\Models\Setting;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -25,7 +24,7 @@ class SettingController extends Controller
     /**
      * 更新
      *
-     * @param StoreTagRequest $request
+     * @param Request $request
      * @param String $key
      * @return JsonResponse
      */
