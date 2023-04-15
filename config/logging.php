@@ -70,6 +70,13 @@ return [
             'days' => 14,
         ],
 
+        //baidu_push
+        'baidu_push' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/baidu_push.log'),
+            'level' => 'debug',
+        ],
+
         'slack' => [
             'driver' => 'slack',
             'url' => env('LOG_SLACK_WEBHOOK_URL'),
