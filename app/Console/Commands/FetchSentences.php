@@ -45,7 +45,7 @@ class FetchSentences extends Command
                 Sentence::query()->create(compact('author', 'translation', 'content'));
             }
         } catch (\Exception $exception) {
-            $this->info($exception->getMessage());
+            $this->error($exception->getMessage());
         }
     }
 }
