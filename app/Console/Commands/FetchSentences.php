@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Sentence;
 use App\Vendors\Http;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Console\Command;
 
 class FetchSentences extends Command
@@ -29,7 +30,7 @@ class FetchSentences extends Command
     /**
      * Execute the console command.
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     public function handle()
     {
@@ -44,7 +45,7 @@ class FetchSentences extends Command
                 Sentence::query()->create(compact('author', 'translation', 'content'));
             }
         } catch (\Exception $exception) {
-            error_info($exception);
+            $this->info($exception->getMessage());
         }
     }
 }
