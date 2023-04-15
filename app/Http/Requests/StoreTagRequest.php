@@ -15,12 +15,10 @@ class StoreTagRequest extends FormRequest
      */
     public function rules(): array
     {
-        $id = (int)$this->post('id');
+        $id = $this->post('id');
         return [
             'name'  => ['bail', 'required'],
-            'slug'  => ['bail', 'required', Rule::unique("tags", 'slug')->when($id > 0, function ($rule) use ($id) {
-                return [$rule->ignore($id)];
-            })]
+            'slug'  => ['bail', 'required', Rule::unique('tags', 'slug')->ignore($id)]
         ];
     }
 }

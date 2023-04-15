@@ -15,9 +15,10 @@ class StoreCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = (int)$this->post('id');
         return [
             'name'      => ['bail', 'required'],
-            'slug'      => ['bail', 'required'],
+            'slug'  => ['bail', 'required', Rule::unique('categories', 'slug')->ignore($id)],
             'order'     => ['bail', 'required', 'integer'],
             'parent_id' => [
                 'bail',
