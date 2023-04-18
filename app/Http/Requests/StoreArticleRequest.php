@@ -20,7 +20,7 @@ class StoreArticleRequest extends FormRequest
             'slug'         => ['bail', 'required', Rule::unique('articles', 'slug')->ignore($id)],
             'order'        => ['bail', 'required', 'integer'],
             'views'        => ['bail', 'required', 'integer'],
-            'tags'         => ['bail', 'required', 'array'],
+            'tags'         => ['bail', 'array'],
             'content_type' => ['bail', 'required', 'integer'],
             'markdown'     => ['bail', Rule::requiredIf($this->content_type === 1)],
             'html'         => ['bail', Rule::requiredIf($this->content_type === 2)],
