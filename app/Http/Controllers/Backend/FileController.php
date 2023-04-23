@@ -26,6 +26,6 @@ class FileController extends Controller
             return $this->error('文件不合法');
         }
 
-        return $this->success($fileHandler->saveTemp($file));
+        return $this->success($fileHandler->updateImage($file));
     }
 }

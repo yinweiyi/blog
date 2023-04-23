@@ -5,6 +5,8 @@ use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CommentController;
 use App\Http\Controllers\Backend\FileController;
+use App\Http\Controllers\Backend\ImageController;
+use App\Http\Controllers\Backend\ImageModelController;
 use App\Http\Controllers\Backend\SentenceController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\TagController;
@@ -90,6 +92,23 @@ Route::group(['prefix' => 'admin'], function () {
         Route::group(['prefix' => 'comment'], function () {
             Route::get('/list', [CommentController::class, 'list']);
             Route::post('/reply', [CommentController::class, 'reply']);
+        });
+
+        Route::group(['prefix' => 'image-model'], function () {
+            Route::get('/list', [ImageModelController::class, 'list']);
+            Route::get('/{image_model}', [ImageModelController::class, 'detail'])->where('image_model', '[0-9]+');
+            Route::post('/store', [ImageModelController::class, 'store']);
+            Route::post('/{image_model}/update', [ImageModelController::class, 'update'])->where('image_model', '[0-9]+');
+            Route::post('/{image_model}/update-status', [ImageModelController::class, 'updateStatus'])->where('image_model', '[0-9]+');
+            Route::delete('/{image_model}', [ImageModelController::class, 'delete'])->where('image_model', '[0-9]+');
+        });
+
+        Route::group(['prefix' => 'image'], function () {
+            Route::get('/list', [ImageController::class, 'list']);
+            Route::get('/{image}', [ImageController::class, 'detail'])->where('image', '[0-9]+');
+            Route::post('/store', [ImageController::class, 'store']);
+            Route::post('/{image}/update', [ImageController::class, 'update'])->where('image', '[0-9]+');
+            Route::delete('/{image}', [ImageController::class, 'delete'])->where('image', '[0-9]+');
         });
     });
 });

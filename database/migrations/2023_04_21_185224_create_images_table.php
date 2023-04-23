@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::connection('stable_diffusion')->create('images', function (Blueprint $table) {
+        Schema::create('images', function (Blueprint $table) {
             $table->id();
             $table->string('image_url')->comment('图片');
             $table->integer('width')->default(0)->comment('宽度');
@@ -28,8 +28,10 @@ return new class extends Migration
             $table->string('sampler')->comment('Sampler');
             $table->bigInteger('seed')->comment('Seed');
             $table->integer('clip_skip')->comment('Clip skip');
-            $table->unsignedBigInteger('model_id')->index()->comment('模型id');
+            $table->bigInteger('order')->default(0)->comment('排序');
+            $table->unsignedBigInteger('image_model_id')->index()->comment('模型id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -40,6 +42,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::connection('stable_diffusion')->dropIfExists('images');
+        Schema::dropIfExists('images');
     }
 };

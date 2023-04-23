@@ -13,12 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::connection('stable_diffusion')->create('models', function (Blueprint $table) {
+        Schema::create('image_models', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique()->comment('名称');
             $table->decimal('size')->comment('文件大小（M）');
             $table->string('download_url')->comment('下载地址');
             $table->text('description')->nullable()->comment('描述');
+            $table->bigInteger('order')->default(0)->comment('排序');
+            $table->tinyInteger('status')->default(1)->comment('是否显示');
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::connection('stable_diffusion')->dropIfExists('models');
+        Schema::dropIfExists('image_models');
     }
 };

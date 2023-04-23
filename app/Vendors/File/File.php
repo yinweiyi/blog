@@ -8,10 +8,11 @@ use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class File
 {
-    protected $allowed_ext = ["png", "jpg", "gif", 'jpeg', 'xls', 'xlsx', 'csv', 'apk'];
+    protected array $allowedImageExtend = ["png", "jpg", "gif", 'jpeg'];
 
 
     /**
@@ -22,10 +23,10 @@ class File
      * @return string[]|null
      * @throws FileNotFoundException
      */
-    public function saveTemp(UploadedFile $file, string $file_prefix = ''): array|null
+    public function updateImage(UploadedFile $file, string $file_prefix = ''): array|null
     {
         // 构建存储的文件夹规则，值如：uploads/images/avatars/201709/21/
-        $uploadPath = config('path.upload_temp') . date("Ym/d", time());
+        $uploadPath = date("Ym/d", time());
 
         // 获取文件的后缀名，因图片从剪贴板里黏贴时后缀名为空，所以此处确保后缀一直存在
         $extension = strtolower($file->getClientOriginalExtension()) ?: 'png';
@@ -35,7 +36,7 @@ class File
         $filename = $file_prefix . uniqid() . '.' . $extension;
 
         // 如果上传的不是图片将终止操作
-        if (!in_array($extension, $this->allowed_ext)) {
+        if (!in_array($extension, $this->allowedImageExtend)) {
             return null;
         }
         // 将图片移动到我们的目标存储路径中
@@ -43,9 +44,14 @@ class File
 
         Storage::put($path, $file->get());
 
+        // 先实例化，传参是文件的磁盘物理路径
+        $image = Image::make($path);
+
         return [
-            'path' => $path,
-            'link' => Storage::url($path)
+            'path'   => $path,
+            'link'   => Storage::url($path),
+            'width'  => $image->getWidth(),
+            'height' => $image->getHeight()
         ];
     }
 }
