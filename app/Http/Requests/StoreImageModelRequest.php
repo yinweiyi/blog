@@ -14,11 +14,9 @@ class StoreImageModelRequest extends FormRequest
     {
         return [
             'name'         => ['bail', 'required'],
-            'size'         => ['bail', 'required', 'number'],
+            'size'         => ['bail', 'required', 'numeric'],
             'download_url' => ['bail', 'required', 'url'],
-            'description'  => ['bail'],
             'order'        => ['bail', 'required', 'integer'],
-            'status'       => ['bail', 'required', 'boolean'],
         ];
     }
 }

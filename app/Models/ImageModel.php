@@ -15,5 +15,5 @@ class ImageModel extends Model
         'name', 'size', 'download_url', 'description', 'order', 'status'
     ];
 
-    protected $casts = ['status' => 'boolean'];
+    protected $casts = ['status' => 'boolean', 'size' => 'float'];
 }
