@@ -24,7 +24,7 @@ class HomeController extends Controller
             ->with(['tags' => function ($query) {
                 $query->select(['id', 'slug', 'name']);
             }])
-            ->orderByRaw('is_top desc, `order` desc')
+            ->orderByRaw('is_top desc, `order` desc, id desc')
             ->paginate(7, ['id', 'title', 'slug', 'author', 'html', 'markdown', 'content_type', 'views', 'created_at']);
         return i_view('home.index', compact('articles'));
     }
@@ -42,7 +42,7 @@ class HomeController extends Controller
             ->whereHas('category', function ($query) use ($slug) {
                 return $query->where('slug', $slug);
             })
-            ->orderByRaw('is_top desc, `order` desc')
+            ->orderByRaw('is_top desc, `order` desc, id desc')
             ->paginate(7, ['id', 'title', 'slug', 'author', 'html', 'markdown', 'content_type', 'views', 'created_at']);
         return i_view('home.index', compact('articles'));
     }
@@ -57,7 +57,7 @@ class HomeController extends Controller
             ->with(['tags' => function ($query) {
                 $query->select(['id', 'slug', 'name']);
             }])
-            ->orderByRaw('is_top desc, `order` desc')
+            ->orderByRaw('is_top desc, `order` desc, id desc')
             ->paginate(7, ['id', 'title', 'slug', 'author', 'html', 'markdown', 'content_type', 'views', 'created_at']);
         return i_view('home.index', compact('articles'));
     }
