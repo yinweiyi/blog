@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreImageRequest;
 use App\Models\Image;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -13,11 +14,12 @@ class ImageController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return JsonResponse
      */
     public function list(Request $request): JsonResponse
     {
-        $articles = Image::query()->orderByDesc('order')->paginate($request->input('pageSize'));
+        $articles = Image::query()->orderByDesc('order')->orderByDesc('id')->paginate($request->input('pageSize'));
 
         return $this->success($this->toPageData($articles));
     }

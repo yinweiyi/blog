@@ -43,9 +43,8 @@ class File
         $path = $uploadPath . '/' . $filename;
 
         Storage::put($path, $file->get());
-
         // 先实例化，传参是文件的磁盘物理路径
-        $image = Image::make($path);
+        $image = Image::make(Storage::path($path));
 
         return [
             'path'   => $path,
