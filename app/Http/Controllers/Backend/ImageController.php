@@ -19,7 +19,10 @@ class ImageController extends Controller
      */
     public function list(Request $request): JsonResponse
     {
-        $articles = Image::query()->orderByDesc('order')->orderByDesc('id')->paginate($request->input('pageSize'));
+        $modelId = (int)$request->get('model_id');
+        $articles = Image::query()->when($modelId > 0, function ($query) use ($modelId) {
+            $query->where('image_model_id', $modelId);
+        })->orderByDesc('order')->orderByDesc('id')->paginate($request->input('pageSize'));
 
         return $this->success($this->toPageData($articles));
     }
