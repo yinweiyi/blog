@@ -3,16 +3,21 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\About;
 use App\Models\Article;
-use App\Models\Guestbook;
 use App\Models\Setting;
 use App\Models\Tag;
 use App\Services\CommentService;
+use App\Vendors\File\OSS;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
+    public function test(OSS $oss)
+    {
+
+    }
+
     /**
      * @param Request $request
      * @return string

@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::get('/test', [HomeController::class, 'test'])->name('home.test');
 Route::get('/category/{category:slug}', [HomeController::class, 'category'])->where('category', '[\d\w-]{1,50}')->name('home.index_category');
 Route::get('/tag/{tag:slug}', [HomeController::class, 'tag'])->where('tag', '[\d\w-]{1,50}')->name('home.index_tag');
 
