@@ -51,8 +51,13 @@ class File
         //本地路径
         $storagePath = Storage::path($path);
 
-        //上传oss
-        $url = $this->uploadOss($path, $storagePath);
+        $url = Storage::url($path);
+
+        if (app()->environment('production')) {
+            //上传oss
+            $url = $this->uploadOss($path, $storagePath);
+        }
+
 
         // 先实例化，传参是文件的磁盘物理路径
         $image = Image::make($storagePath);
