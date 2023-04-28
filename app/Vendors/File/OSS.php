@@ -4,7 +4,6 @@
 namespace App\Vendors\File;
 
 
-use Illuminate\Support\Facades\Config;
 use Qcloud\Cos\Client;
 
 class OSS
