@@ -26,6 +26,6 @@ class FileController extends Controller
             return $this->error('文件不合法');
         }
 
-        return $this->success($fileHandler->updateImage($file));
+        return $this->success($fileHandler->updateImage($file, $request->post('prefix', ''), $request->post('maxWidth', 0)));
     }
 }

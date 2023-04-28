@@ -19,11 +19,12 @@ class File
      * 存放临时目录
      *
      * @param UploadedFile $file
-     * @param string $file_prefix
+     * @param string $filePrefix
+     * @param int $maxWidth
      * @return string[]|null
      * @throws FileNotFoundException
      */
-    public function updateImage(UploadedFile $file, string $file_prefix = ''): array|null
+    public function updateImage(UploadedFile $file, string $filePrefix = '', int $maxWidth = 0): array|null
     {
         // 构建存储的文件夹规则，值如：uploads/images/avatars/201709/21/
         $uploadPath = date("Ym/d", time());
@@ -33,7 +34,7 @@ class File
 
         // 拼接文件名，加前缀是为了增加辨析度，前缀可以是相关数据模型的 ID
         // 值如：1_1493521050_7BVc9v9ujP.png
-        $filename = $file_prefix . uniqid() . '.' . $extension;
+        $filename = $filePrefix . uniqid() . '.' . $extension;
 
         // 如果上传的不是图片将终止操作
         if (!in_array($extension, $this->allowedImageExtend)) {
@@ -45,6 +46,21 @@ class File
         Storage::put($path, $file->get());
         // 先实例化，传参是文件的磁盘物理路径
         $image = Image::make(Storage::path($path));
+
+        if ($maxWidth > 0 && $image->getWidth() > $maxWidth ) {
+            // 进行大小调整的操作
+            $image->resize($maxWidth, null, function ($constraint) {
+                // 设定宽度是 $max_width，高度等比例缩放
+                $constraint->aspectRatio();
+
+                // 防止裁图时图片尺寸变大
+                $constraint->upsize();
+            });
+        }
+
+        // 对图片修改后进行保存
+        $image->save();
+
 
         return [
             'path'   => $path,
