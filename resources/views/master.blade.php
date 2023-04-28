@@ -13,7 +13,7 @@
     <meta name="keywords" content="{{ $site['keywords'] ?? '' }},@yield('keywords', '')">
     <meta name="description" content="{{ $site['description'] ?? '' }}">
     <link href="{{ asset('css/ie10-viewport-bug-workaround.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.min.css') }}" rel="stylesheet">
     @yield('css')
     <!--[if lt IE 9]>
     <script src="../../assets/js/ie8-responsive-file-warning.js"></script>

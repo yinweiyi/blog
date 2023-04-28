@@ -1778,6 +1778,12 @@ pre code {
     }
 }
 
+@media (min-width: 1350px) {
+    .container {
+        width: 1320px
+    }
+}
+
 .row {
     margin-left: -15px;
     margin-right: -15px
@@ -7526,9 +7532,21 @@ code.codecolorer {
     line-height: 200px;
     text-align: center;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+    transition: transform 0.3s ease-out;
+}
+
+.grid .item:hover{
+    transform: scale(1.1);
 }
 
 /* Media Queries */
+@media screen and (min-width: 1320px) {
+    .grid .item {
+        width: calc(20% - 30px);
+    }
+}
+
+
 @media screen and (max-width: 1024px) {
     .grid .item {
         width: calc(33.33% - 20px);
