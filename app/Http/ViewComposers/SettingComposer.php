@@ -4,6 +4,7 @@
 namespace App\Http\ViewComposers;
 
 use App\Models\Setting;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 
 class SettingComposer
@@ -16,8 +17,10 @@ class SettingComposer
      */
     public function compose(View $view): void
     {
-        //todo cache
-        $setting = Setting::query()->where('key', 'site')->first();
+        $setting = Cache::remember('setting', 3600, function () {
+             return Setting::query()->where('key', 'site')->first();
+        });
+
         $view->with('site', $setting->value);
     }
 }

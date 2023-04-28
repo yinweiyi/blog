@@ -4,6 +4,7 @@
 namespace App\Http\ViewComposers;
 
 use App\Models\Category;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 
 class CategoriesComposer
@@ -16,8 +17,11 @@ class CategoriesComposer
      */
     public function compose(View $view)
     {
-        $categories = Category::query()->orderByDesc('order')->select('id', 'parent_id', 'name', 'slug')->get();
-        $categories = unlimited_for_layer($categories);
+        $categories = Cache::remember('categories', 1800, function () {
+            $categories = Category::query()->orderByDesc('order')->select('id', 'parent_id', 'name', 'slug')->get();
+            return unlimited_for_layer($categories);
+        });
+
         $view->with('categories', $categories);
     }
 }

@@ -4,6 +4,7 @@
 namespace App\Http\ViewComposers;
 
 use App\Models\Tag;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 
 class TagsComposer
@@ -16,6 +17,9 @@ class TagsComposer
      */
     public function compose(View $view): void
     {
-        $view->with('tags', Tag::query()->pluck('name', 'slug')->shuffleWithKey());
+        $tags = Cache::remember('tags', 3600, function () {
+            return Tag::query()->pluck('name', 'slug');
+        });
+        $view->with('tags', $tags->shuffleWithKey());
     }
 }

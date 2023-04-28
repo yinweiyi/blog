@@ -28,6 +28,18 @@
                     </li>
                 @endforeach
 
+                <li class="{{ request()->is('image') ? 'active' : '' }}">
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">AI图片  <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ route('image.index')}}">全部</a></li>
+                        @foreach($imageModels as $imageModel)
+                            <li>
+                                <a href="{{ route('image.index') . '?model_id=' . $imageModel->id }}">{{ $imageModel->name }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </li>
+
                 <li class="{{ request()->is('guestbook*') ? 'active' : '' }}">
                     <a href="{{ route('home.guestbook') }}">留言</a>
                 </li>

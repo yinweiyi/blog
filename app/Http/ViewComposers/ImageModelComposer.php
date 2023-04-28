@@ -3,11 +3,11 @@
 
 namespace App\Http\ViewComposers;
 
-use App\Models\Article;
+use App\Models\ImageModel;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 
-class HotsComposer
+class ImageModelComposer
 {
     /**
      * Bind data to the view.
@@ -17,9 +17,9 @@ class HotsComposer
      */
     public function compose(View $view): void
     {
-        $hots = Cache::remember('hots', 3600, function () {
-            return Article::query()->orderByDesc('views')->limit(10)->select(['slug', 'title'])->get();
+        $imageModels = Cache::remember('image_models', 3600, function () {
+            return ImageModel::query()->orderByDesc('order')->select('id', 'name')->get();
         });
-        $view->with('hots', $hots);
+        $view->with('imageModels', $imageModels);
     }
 }

@@ -10,6 +10,7 @@ namespace App\Http\ViewComposers;
 
 
 use App\Models\Sentence;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 
 class SentenceComposer
@@ -22,7 +23,9 @@ class SentenceComposer
      */
     public function compose(View $view): void
     {
-        $sentence = Sentence::query()->orderByDesc('id')->select(['author', 'content', 'translation', 'created_at'])->first();
+        $sentence = Cache::remember('sentence', 3600, function () {
+            return Sentence::query()->orderByDesc('id')->select(['author', 'content', 'translation', 'created_at'])->first();
+        });
         $view->with('sentence', $sentence);
     }
 }

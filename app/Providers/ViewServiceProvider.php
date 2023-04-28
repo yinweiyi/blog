@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Http\ViewComposers\CategoriesComposer;
 use App\Http\ViewComposers\FriendshipComposer;
 use App\Http\ViewComposers\HotsComposer;
+use App\Http\ViewComposers\ImageModelComposer;
 use App\Http\ViewComposers\NewCommentsComposer;
 use App\Http\ViewComposers\SentenceComposer;
 use App\Http\ViewComposers\SettingComposer;
@@ -20,6 +21,7 @@ class ViewServiceProvider extends ServiceProvider
         SettingComposer::class     => ['layouts.footer', 'layouts.nav', 'master'],
         TagsComposer::class        => 'layouts.tags',
         CategoriesComposer::class  => 'layouts.nav',
+        ImageModelComposer::class  => 'layouts.nav',
         HotsComposer::class        => 'layouts.hots',
         FriendshipComposer::class  => 'layouts.friendships',
         NewCommentsComposer::class => 'layouts.newest_comments',

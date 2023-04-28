@@ -7504,3 +7504,49 @@ code.codecolorer {
 .railscasts .xml .re0 {
     color: #6d9cbe
 }
+
+/*瀑布iyc*/
+.grid {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+}
+
+.grid .item {
+    width: calc(25% - 20px);
+    margin: 10px;
+    float: left;
+    background-color: #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 200px;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* Media Queries */
+@media screen and (max-width: 1024px) {
+    .grid .item {
+        width: calc(33.33% - 20px);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .grid .item {
+        width: calc(50% - 20px);
+    }
+
+    /* 2列 */
+}
+
+.grid .item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
