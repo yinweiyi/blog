@@ -52,9 +52,6 @@
                     let windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
                     let scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
                     if (scrollTop + windowHeight >= scrollHeight) {
-                        console.log(that.loading)
-                        console.log(Math.ceil(that.total / that.pageSize))
-                        console.log(that.page)
                         if (that.loading === false && Math.ceil(that.total / that.pageSize) > that.page) {
                             that.page++
                             that.fetchImage()
@@ -77,18 +74,20 @@
                             if (result.code === 200) {
                                 that.total = result.data.total;
                                 let list = result.data.list;
+                                let appendHtml = '';
                                 for (let i in list) {
-                                    that.gridContainer.append(that.newItemHtml.replace('%url%', list[i].image_url))
-                                    that.gridContainer.isotope('reloadItems').isotope();
-                                    that.gridContainer.imagesLoaded().progress(function () {
-                                        that.gridContainer.isotope('layout');
-                                    });
+                                    appendHtml += that.newItemHtml.replace('%url%', list[i].image_url);
                                 }
+
+                                that.gridContainer.append(appendHtml)
+                                that.gridContainer.isotope('reloadItems').isotope();
+                                that.gridContainer.imagesLoaded().progress(function () {
+                                    that.gridContainer.isotope('layout');
+                                });
                             }
                         },
-                        finally: function () {
-                            that.loading = false
-                        }
+                    }).always(function (){
+                        that.loading = false
                     })
                 }
             }
