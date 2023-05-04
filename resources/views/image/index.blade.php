@@ -10,7 +10,17 @@
         <div class="col-md-12">
             <div class="grid">
                 @foreach($list as $item)
-                    <div class="item"><img src="{{ $item->image_url }}"></div>
+                    <div class="item">
+                        <img src="{{ $item->image_url }}" alt=""/>
+                        <div class="item-bottom">
+                            <a href="javascript:" data-id="{{ $item->id }}" class="like btn-like">
+                                👍 <span class="count">{{ $item->likes }}</span>
+                            </a>
+                            <a href="javascript:" data-id="{{ $item->id }}" class="hearts btn-like">
+                                ❤️ <span class="count">{{ $item->hearts }}</span>
+                            </a>
+                        </div>
+                    </div>
                 @endforeach
             </div>
 
@@ -26,7 +36,13 @@
                 this.page = 1;  //页码
                 this.pageSize = 15; //每页显示条数
                 this.gridContainer = $('.grid');
-                this.newItemHtml = '<div class="item"><img src="%url%"></div>';
+                this.newItemHtml = '<div class="item">' +
+                    '<img src="%url%" alt="" />' +
+                    '<div class="item-bottom">' +
+                    '<a href="javascript:" data-id="%id%" class="like btn-like"> 👍 <span class="count">%likes%</span></a>' +
+                    '<a href="javascript:" data-id="%id%" class="hearts btn-like"> ❤️ <span class="count">%hearts%</span></a>' +
+                    '</div>' +
+                    '</div>';
                 this.modelId = parseInt('{{ $modelId }}');
                 this.loading = false;
             };
@@ -42,8 +58,30 @@
                         that.gridContainer.isotope('layout');
                     });
 
+                    this.gridContainer.on('click', '.btn-like', function (){
+                        that.onLikeImage($(this));
+                    })
+
                     window.addEventListener('scroll', function () {
                         that.onWindowScroll(that)
+                    })
+                },
+
+                onLikeImage: function ($btnLike) {
+                    let id = $btnLike.data('id'), type = $btnLike.hasClass('like') ? 'likes' : 'hearts';
+                    $.ajax({
+                        url: '{{ route('image.like') }}',
+                        type: 'post',
+                        dataType: 'json',
+                        data: {
+                            image_id: id,
+                            type: type,
+                        },
+                        success: function (result) {
+                            if (result.code === 200) {
+                                $btnLike.children('.count').html(result.data)
+                            }
+                        },
                     })
                 },
 
@@ -76,7 +114,9 @@
                                 let list = result.data.list;
                                 let appendHtml = '';
                                 for (let i in list) {
-                                    appendHtml += that.newItemHtml.replace('%url%', list[i].image_url);
+                                    appendHtml += that.newItemHtml.replaceAll('%id%', list[i].id).replace('%url%', list[i].image_url)
+                                        .replace('%likes%', list[i].likes)
+                                        .replace('%hearts%', list[i].hearts);
                                 }
 
                                 that.gridContainer.append(appendHtml)
@@ -86,7 +126,7 @@
                                 });
                             }
                         },
-                    }).always(function (){
+                    }).always(function () {
                         that.loading = false
                     })
                 }
@@ -96,4 +136,28 @@
             image.init();
         });
     </script>
+@endsection
+@section('css')
+    <style>
+        .item .item-bottom {
+            position: absolute;
+            left: 5px;
+            bottom: 5px;
+            height: 24px;
+            line-height: 24px;
+            font-size: 16px;
+            background-color: gray;
+            opacity: 0.7;
+            width: 40%;
+            min-width: 85px;
+            border-radius: 3px;
+            display: flex;
+
+        }
+
+        .item .item-bottom a {
+            color: white !important;
+            flex: 1;
+        }
+    </style>
 @endsection
