@@ -19,7 +19,7 @@
                 <div
                     class="bg-gray-900 rounded-lg shadow-md overflow-hidden transition-all duration-300 ease-linear hover:shadow-lg hover:shadow-gray-600 group">
                     <div class="overflow-hidden">
-                        <LazyImg :url="item.image_url + '?imageView2/2/w/300/q/85'"
+                        <LazyImg :url="item.image_url"
                                  class="cursor-pointer transition-all duration-300 ease-linear group-hover:scale-105"/>
                     </div>
                     <div class="px-4 pt-2 pb-4 border-t border-t-gray-800">
