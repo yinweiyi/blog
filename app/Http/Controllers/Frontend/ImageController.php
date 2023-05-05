@@ -23,11 +23,13 @@ class ImageController extends Controller
     public function index(Request $request): View
     {
         $modelId = (int)$request->get('model_id');
-        $articles = Image::query()->when($modelId > 0, function ($query) use ($modelId) {
-            $query->where('image_model_id', $modelId);
-        })->orderByDesc('order')->orderByDesc('id')->paginate($request->input('pageSize', 15));
+        return \view('image.index-vue', ['modelId' => $modelId]);
 
-        return view('image.index', array_merge($this->toPageData($articles), ['modelId' => $modelId]));
+//        $articles = Image::query()->when($modelId > 0, function ($query) use ($modelId) {
+//            $query->where('image_model_id', $modelId);
+//        })->orderByDesc('order')->orderByDesc('id')->paginate($request->input('pageSize', 15));
+//
+//        return view('image.index', array_merge($this->toPageData($articles), ['modelId' => $modelId]));
     }
 
     /**
@@ -46,7 +48,11 @@ class ImageController extends Controller
         return $this->success($this->toPageData($articles));
     }
 
-    public function like(ImageLikeRequest $request)
+    /**
+     * @param ImageLikeRequest $request
+     * @return JsonResponse
+     */
+    public function like(ImageLikeRequest $request): JsonResponse
     {
         $data = $request->post();
         //找出ip

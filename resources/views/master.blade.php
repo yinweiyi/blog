@@ -36,7 +36,7 @@
 </head>
 <body>
 @include('layouts.nav')
-<div class="container main">
+<div class="container main" id="app">
     @yield('container')
 </div>
 @include('layouts.footer')

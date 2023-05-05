@@ -29,8 +29,8 @@ Route::get('/guestbook', [HomeController::class, 'guestbook'])->name('home.guest
 Route::get('/articles/{slug}', [ArticleController::class, 'show'])->where('slug', '[\d\w-]{1,50}')->name('article.show');
 
 Route::get('/image', [ImageController::class, 'index'])->name('image.index');
-Route::get('/list', [ImageController::class, 'list'])->name('image.list');
-Route::post('/like', [ImageController::class, 'like'])->name('image.like');
+Route::get('/image/list', [ImageController::class, 'list'])->name('image.list');
+Route::post('/image/like', [ImageController::class, 'like'])->name('image.like');
 
 Route::get('/captcha', [CaptchaController::class, 'captcha'])->name('captcha');
 
