@@ -20,7 +20,9 @@
                     class="bg-gray-900 rounded-lg shadow-md overflow-hidden transition-all duration-300 ease-linear hover:shadow-lg hover:shadow-gray-600 group">
                     <div class="overflow-hidden">
                         <LazyImg :url="item.image_url"
-                                 class="cursor-pointer transition-all duration-300 ease-linear group-hover:scale-105"/>
+                                 class="cursor-pointer transition-all duration-300 ease-linear group-hover:scale-105"
+                                 @click="selectedImageUrl = item.image_url"
+                        />
                     </div>
                     <div class="px-4 pt-2 pb-4 border-t border-t-gray-800">
                         <div class="pt-3 flex  items-center border-t-gray-600 border-opacity-50">
@@ -39,6 +41,9 @@
                 </div>
             </template>
         </Waterfall>
+        <div class="cover" v-if="selectedImageUrl != null && selectedImageUrl !== ''" @click="selectedImageUrl = ''">
+            <img :src="selectedImageUrl" class="cover-image" />
+        </div>
     </div>
 </template>
 
@@ -57,6 +62,8 @@ const props = defineProps({
 })
 
 const tableData = ref([])
+
+const selectedImageUrl = ref('')
 
 const paginationData = reactive({
     currentPage: 1,
@@ -147,7 +154,7 @@ const options = reactive({
         errorPng,
     },
     // 是否懒加载
-    lazyload: true,
+    lazyload: false,
 
 })
 
@@ -160,5 +167,21 @@ onMounted(() => {
 </script>
 
 <style scoped>
-
+.cover{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 15000;
+}
+.cover .cover-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    max-width: 80%;
+    max-height: 90%;
+    transform: translate(-50%, -50%);
+}
 </style>

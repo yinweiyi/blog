@@ -8,21 +8,21 @@
     "src": "resources/images/error.png"
   },
   "resources/css/app.css": {
-    "file": "assets/app-cff2257c.css",
+    "file": "assets/app-3ab38637.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/app.css": {
-    "file": "assets/app-30fe00ee.css",
+    "file": "assets/app-d2211484.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.js": {
-    "file": "assets/app-79894762.js",
+    "file": "assets/app-23a7df7a.js",
     "src": "resources/js/app.js",
     "isEntry": true,
     "css": [
-      "assets/app-30fe00ee.css",
-      "assets/app-cff2257c.css"
+      "assets/app-d2211484.css",
+      "assets/app-3ab38637.css"
     ],
     "assets": [
       "assets/loading-cc1c87e5.png",
