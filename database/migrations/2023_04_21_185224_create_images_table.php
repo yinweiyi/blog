@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('hearts')->default(0)->comment('爱心数');
             $table->integer('dislikes')->default(0)->comment('不喜欢数');
             $table->text('prompt')->comment('Prompt');
-            $table->text('negative_prompt')->default('')->comment('Negative prompt');
+            $table->text('negative_prompt')->nullable()->comment('Negative prompt');
             $table->bigInteger('order')->default(0)->comment('排序');
             $table->unsignedBigInteger('image_model_id')->index()->comment('模型id');
             $table->timestamps();
