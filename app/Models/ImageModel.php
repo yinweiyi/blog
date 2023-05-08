@@ -12,8 +12,8 @@ class ImageModel extends Model
     use HasDateTimeFormatter;
 
     protected $fillable = [
-        'name', 'size', 'download_url', 'default_prompt', 'default_negative_prompt', 'description', 'order', 'status'
+        'name', 'description', 'order', 'status'
     ];
 
-    protected $casts = ['status' => 'boolean', 'size' => 'float'];
+    protected $casts = ['status' => 'boolean'];
 }

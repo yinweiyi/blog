@@ -15,7 +15,6 @@ class StoreImageRequest extends FormRequest
         return [
             'image_url'       => ['bail', 'required'],
             'prompt'          => ['bail', 'required'],
-            'negative_prompt' => ['bail', 'required'],
         ];
     }
 }
