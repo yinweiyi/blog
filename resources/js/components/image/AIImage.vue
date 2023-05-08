@@ -41,8 +41,8 @@
                 </div>
             </template>
         </Waterfall>
-        <div class="cover" v-if="selectedImageUrl != null && selectedImageUrl !== ''" @click="selectedImageUrl = ''">
-            <img :src="selectedImageUrl" class="cover-image" />
+        <div class="mask" v-if="selectedImageUrl != null && selectedImageUrl !== ''" @click="selectedImageUrl = ''">
+            <img :src="selectedImageUrl" class="mask-image" />
         </div>
     </div>
 </template>
@@ -154,7 +154,7 @@ const options = reactive({
         errorPng,
     },
     // 是否懒加载
-    lazyload: false,
+    lazyload: true,
 
 })
 
@@ -167,7 +167,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.cover{
+.mask{
     position: fixed;
     top: 0;
     left: 0;
@@ -176,7 +176,7 @@ onMounted(() => {
     background: rgba(0, 0, 0, 0.7);
     z-index: 15000;
 }
-.cover .cover-image {
+.mask .mask-image {
     position: absolute;
     top: 50%;
     left: 50%;
