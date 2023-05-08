@@ -23,13 +23,14 @@ class ImageController extends Controller
     public function index(Request $request): View
     {
         $modelId = (int)$request->get('model_id');
-        return \view('image.index-vue', ['modelId' => $modelId]);
 
-//        $articles = Image::query()->when($modelId > 0, function ($query) use ($modelId) {
-//            $query->where('image_model_id', $modelId);
-//        })->orderByDesc('order')->orderByDesc('id')->paginate($request->input('pageSize', 15));
-//
-//        return view('image.index', array_merge($this->toPageData($articles), ['modelId' => $modelId]));
+
+        $articles = Image::query()->when($modelId > 0, function ($query) use ($modelId) {
+            $query->where('image_model_id', $modelId);
+        })->orderByDesc('order')->orderByDesc('id')->paginate($request->input('pageSize', 15));
+
+        return view('image.index-vue', array_merge($this->toPageData($articles), ['modelId' => $modelId]));
+        //return view('image.index', array_merge($this->toPageData($articles), ['modelId' => $modelId]));
     }
 
     /**

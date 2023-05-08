@@ -5,5 +5,5 @@
 @endsection
 
 @section('container')
-    <a-i-image :model-id="{{ $modelId }}"></a-i-image>
+    <a-i-image :model-id="{{ $modelId }}" :list="{{ \json_encode($list) }}" :total="{{ $total }}"></a-i-image>
 @endsection

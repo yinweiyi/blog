@@ -58,16 +58,26 @@ const props = defineProps({
     modelId: {
         type: Number,
         required: true
+    },
+    list: {
+        type: Array,
+        required: true
+    },
+    total: {
+        type: Number,
+        required: true
     }
 })
 
-const tableData = ref([])
 
 const selectedImageUrl = ref('')
 
+const tableData = ref(props.list)
+
 const paginationData = reactive({
     currentPage: 1,
-    pageSize: 15
+    pageSize: 15,
+    total: parseInt(props.total)
 })
 
 const formData = reactive({
@@ -160,8 +170,6 @@ const options = reactive({
 
 onMounted(() => {
     window.addEventListener('scroll', onScroll)
-    //document.querySelector('.app-main')?.addEventListener('scroll', onScroll);
-    getTableData()
 })
 
 </script>
