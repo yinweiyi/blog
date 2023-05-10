@@ -33,6 +33,10 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
 
+            Route::middleware('api')
+                ->domain('open.baigei.com')
+                ->group(base_path('routes/open.php'));
+
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
         });
