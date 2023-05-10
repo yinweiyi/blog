@@ -70,6 +70,13 @@ return [
             'days' => 14,
         ],
 
+        'wechat_message' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/wechat_message.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'days' => 14,
+        ],
+
         //baidu_push
         'baidu_push' => [
             'driver' => 'single',
