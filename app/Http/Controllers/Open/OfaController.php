@@ -38,7 +38,7 @@ class OfaController extends Controller
      * @throws \ReflectionException
      * @throws BadRequestException
      */
-    public function receive()
+    public function receive(): ResponseInterface
     {
         $server = $this->ofaApp->getServer();
         $server->with(CustomHandler::class);

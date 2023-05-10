@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\CommentController;
 use App\Http\Controllers\Backend\FileController;
 use App\Http\Controllers\Backend\ImageController;
 use App\Http\Controllers\Backend\ImageModelController;
+use App\Http\Controllers\Backend\OfficialAccountController;
 use App\Http\Controllers\Backend\SentenceController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\TagController;
@@ -109,6 +110,11 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/store', [ImageController::class, 'store']);
             Route::post('/{image}/update', [ImageController::class, 'update'])->where('image', '[0-9]+');
             Route::delete('/{image}', [ImageController::class, 'delete'])->where('image', '[0-9]+');
+        });
+
+        Route::group(['prefix' => 'ofa'], function () {
+            Route::get('/menu', [OfficialAccountController::class, 'menu']);
+            Route::post('/publish-menu', [OfficialAccountController::class, 'publishMenu']);
         });
     });
 });
