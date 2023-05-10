@@ -1,5 +1,5 @@
 <?php
-$config = [
+return [
     'app_id' => env('WECHAT_APP_ID', ''),
     'secret' => env('WECHAT_SECRET', ''),
     'token' => env('WECHAT_TOKEN', ''),
