@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Open;
 
 use App\Http\Controllers\Controller;
+use App\Vendors\Wechat\CustomHandler;
 use EasyWeChat\Kernel\Exceptions\BadRequestException;
 use EasyWeChat\Kernel\Exceptions\InvalidArgumentException;
 use EasyWeChat\Kernel\Exceptions\RuntimeException;
@@ -39,9 +40,8 @@ class OfaController extends Controller
      */
     public function receive()
     {
-        $decryptedMessage = $this->ofaApp->getServer()->getDecryptedMessage();
-        $requestMessage = $this->ofaApp->getServer()->getRequestMessage();
-
-        Log::info('decryptedMessage:, ' . $decryptedMessage->toJson() . "\nrequestMessage:" . $requestMessage->toJson());
+        $server = $this->ofaApp->getServer();
+        $server->with(CustomHandler::class);
+        return $server->serve();
     }
 }
