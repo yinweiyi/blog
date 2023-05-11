@@ -4,6 +4,7 @@ namespace App\Vendors\Wechat;
 
 use EasyWeChat\Kernel\Exceptions\InvalidArgumentException;
 use EasyWeChat\OfficialAccount\Application;
+use Illuminate\Support\Facades\Cache;
 
 class Wechat
 {
@@ -20,6 +21,10 @@ class Wechat
      */
     public function getOfsApplication(): Application
     {
-        return new Application($this->config);
+        $application =  new Application($this->config);
+
+        $application->setCache(Cache::store('redis'));
+
+        return $application;
     }
 }
