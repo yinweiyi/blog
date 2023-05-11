@@ -115,4 +115,32 @@ class OfficialAccountController extends Controller
 
         return Arr::get($content, 'media_id') ? $this->success() : $this->error(Arr::get($content, 'errmsg', '上传失败'));
     }
+
+    /**
+     * 删除
+     *
+     * @param Request $request
+     * @return JsonResponse
+     * @throws ClientExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
+     */
+    public function deleteMaterial(Request $request): JsonResponse
+    {
+        $mediaId = $request->input('media_id');
+        if (empty($mediaId)) {
+            return $this->error('media_id不存在');
+        }
+
+        $response = $this->ofaApp->getClient()->post('/cgi-bin/material/del_material', [
+            'json' => [
+                'media_id' => $mediaId
+            ]
+        ]);
+        $content = \json_decode($response->getContent(), true);
+
+        return Arr::get($content, 'errcode') === 0 ? $this->success() : $this->error(Arr::get($content, 'errmsg', '发布失败'));
+
+    }
 }

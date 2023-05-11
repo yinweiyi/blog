@@ -118,6 +118,7 @@ Route::group(['prefix' => 'admin'], function () {
 
             Route::get('/material', [OfficialAccountController::class, 'material']);
             Route::post('/add-material', [OfficialAccountController::class, 'addMaterial']);
+            Route::delete('/del-material', [OfficialAccountController::class, 'deleteMaterial']);
         });
     });
 });
