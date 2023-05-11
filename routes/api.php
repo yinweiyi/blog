@@ -115,6 +115,9 @@ Route::group(['prefix' => 'admin'], function () {
         Route::group(['prefix' => 'ofa'], function () {
             Route::get('/menu', [OfficialAccountController::class, 'menu']);
             Route::post('/publish-menu', [OfficialAccountController::class, 'publishMenu']);
+
+            Route::get('/material', [OfficialAccountController::class, 'material']);
+            Route::post('/add-material', [OfficialAccountController::class, 'addMaterial']);
         });
     });
 });
