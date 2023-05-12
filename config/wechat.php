@@ -21,7 +21,7 @@ return [
      * https://github.com/symfony/symfony/blob/5.3/src/Symfony/Contracts/HttpClient/HttpClientInterface.php
      */
     'http' => [
-        'timeout' => 5.0,
+        'timeout' => 20.0,
         // 'base_uri' => 'https://api.weixin.qq.com/', // 如果你在国外想要覆盖默认的 url 的时候才使用，根据不同的模块配置不同的 uri
 
         'retry' => true, // 使用默认重试配置
