@@ -61,7 +61,7 @@ class ImageToMaterial extends Command
             $storagePath = Storage::path($path);
             if (!is_file($storagePath)) {
                 $this->error('File not found:' . $storagePath);
-                $path = Str::replace($ossConfig['domain'] . '/ai-image', '', $image->image_url);
+                $path = Str::replace('?imageMogr2/format/webp', '', Str::replace($ossConfig['domain'] . '/ai-image', '', $image->image_url));
                 $storagePath = Storage::path($path);
                 if (!is_file($storagePath)) {
                     $this->error('File not found:' . $storagePath);
