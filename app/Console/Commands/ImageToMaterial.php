@@ -57,7 +57,7 @@ class ImageToMaterial extends Command
             }
             $this->info('Transform ：' . $image->image_url);
 
-            $path = Str::replace($ossConfig['domain'] . '/ai-image/', '/storage/', $image->image_url);
+            $path = Str::replace($ossConfig['domain'], '/storage/', $image->image_url);
             $storagePath = Storage::path($path);
             if (!is_file($storagePath)) {
                 $this->error('File not found:' . $storagePath);
