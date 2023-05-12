@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('images', function (Blueprint $table) {
-            $table->string('material_id', 100)->after('negative_prompt')->default('')->comment('素材id');
+            $table->string('media_id', 100)->after('negative_prompt')->default('')->comment('素材id');
         });
     }
 
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropColumns('images', ['material_id']);
+        Schema::dropColumns('images', ['media_id']);
     }
 };
