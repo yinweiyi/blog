@@ -61,7 +61,12 @@ class ImageToMaterial extends Command
             $storagePath = Storage::path($path);
             if (!is_file($storagePath)) {
                 $this->error('File not found:' . $storagePath);
-                continue;
+                $path = Str::replace($ossConfig['domain'] . '/ai-image', '', $image->image_url);
+                $storagePath = Storage::path($path);
+                if (!is_file($storagePath)) {
+                    $this->error('File not found:' . $storagePath);
+                    continue;
+                }
             }
             $this->info('正在处理：' . $image->image_url);
 
