@@ -12,6 +12,6 @@ class Image extends Model
     use HasFactory, HasDateTimeFormatter, SoftDeletes;
 
     protected $fillable = [
-        'image_url', 'width', 'height', 'likes', 'hearts', 'dislikes', 'prompt', 'negative_prompt', 'order', 'image_model_id',
+        'image_url', 'width', 'height', 'likes', 'hearts', 'dislikes', 'prompt', 'negative_prompt', 'media_id', 'order', 'image_model_id',
     ];
 }
