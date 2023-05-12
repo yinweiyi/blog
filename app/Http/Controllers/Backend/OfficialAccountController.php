@@ -86,7 +86,6 @@ class OfficialAccountController extends Controller
 
         $content = \json_decode($response->getContent(), true);
 
-        Log::info($content);
         return $this->success([
             'list'  => $content['item'] ?? [],
             'total' => $content['total_count'] ?? 0
