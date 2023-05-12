@@ -47,7 +47,7 @@ class ImageToMaterial extends Command
      */
     public function handle(): void
     {
-        $images = Image::query()->where('material_id', '')->orderByDesc('id')->select('id', 'image_url')->get();
+        $images = Image::query()->where('media_id', '')->orderByDesc('id')->select('id', 'image_url')->get();
 
         $ossConfig = Config::get('oss');
 
