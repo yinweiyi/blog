@@ -41,14 +41,20 @@
                 </div>
             </template>
         </Waterfall>
+        <div class="loading-more">
+            <button id="load-more-button" v-if="hasMore">
+                <span v-if="!loading" @click="loadMore">Load More...</span>
+                <img v-else src="https://image.baigei.com/baigei/202305/16/loading.gif"  alt="loading">
+            </button>
+        </div>
         <div class="mask" v-if="selectedImageUrl != null && selectedImageUrl !== ''" @click="selectedImageUrl = ''">
-            <img :src="selectedImageUrl" class="mask-image" />
+            <img :src="selectedImageUrl" class="mask-image"/>
         </div>
     </div>
 </template>
 
 <script setup>
-import {reactive, ref, onMounted} from "vue";
+import {reactive, ref, onMounted, computed, nextTick} from "vue";
 import loadingPng from "../../../images/loading.png"
 import errorPng from "../../../images/error.png"
 import {LazyImg, Waterfall} from 'vue-waterfall-plugin-next'
@@ -87,6 +93,11 @@ const formData = reactive({
 })
 
 const loading = ref(false)
+
+const hasMore = computed(() => {
+    return Math.ceil(paginationData.total / paginationData.pageSize) > paginationData.currentPage
+})
+
 const getTableData = () => {
     loading.value = true
     formData.page = paginationData.currentPage
@@ -96,7 +107,7 @@ const getTableData = () => {
         paginationData.total = res.data.data.total
         tableData.value.push(...res.data.data.list)
     }).finally(() => {
-        loading.value = false
+       setTimeout(() => loading.value = false, 500)
     })
 }
 
@@ -105,11 +116,15 @@ const onScroll = () => {
     let windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
     let scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
     if (scrollTop + windowHeight >= scrollHeight) {
-        if (loading.value === false && Math.ceil(paginationData.total / paginationData.pageSize) > paginationData.currentPage) {
-            paginationData.currentPage++
-            getTableData()
+        if (loading.value === false && hasMore.value) {
+            loadMore()
         }
     }
+}
+
+const loadMore = () => {
+    paginationData.currentPage++
+    getTableData()
 }
 
 const onLikeImage = (item, type) => {
@@ -175,7 +190,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.mask{
+.mask {
     position: fixed;
     top: 0;
     left: 0;
@@ -184,6 +199,7 @@ onMounted(() => {
     background: rgba(0, 0, 0, 0.7);
     z-index: 15000;
 }
+
 .mask .mask-image {
     position: absolute;
     top: 50%;
@@ -191,5 +207,26 @@ onMounted(() => {
     max-width: 80%;
     max-height: 90%;
     transform: translate(-50%, -50%);
+}
+
+#load-more-button {
+    display: block;
+    margin: 20px auto;
+    padding: 4px 20px;
+    background-color: #605f5f;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#load-more-button img {
+    width: 20px;
+}
+
+#load-more-button:hover {
+    background-color: #262626;
 }
 </style>
