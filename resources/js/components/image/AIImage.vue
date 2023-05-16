@@ -54,7 +54,7 @@
 </template>
 
 <script setup>
-import {reactive, ref, onMounted, computed, nextTick} from "vue";
+import {reactive, ref, onMounted, computed} from "vue";
 import loadingPng from "../../../images/loading.png"
 import errorPng from "../../../images/error.png"
 import {LazyImg, Waterfall} from 'vue-waterfall-plugin-next'
