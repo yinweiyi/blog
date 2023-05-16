@@ -45,6 +45,7 @@
             @include('layouts.hots')
             @include('layouts.newest_comments')
             @include('layouts.friendships')
+            @include('layouts.official-account')
         </div>
     </div><!-- /.row -->
 @endsection
