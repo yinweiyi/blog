@@ -43,8 +43,8 @@
         </Waterfall>
         <div class="loading-more">
             <button id="load-more-button" v-if="hasMore">
-                <span v-if="!loading" @click="loadMore">Load More...</span>
-                <img v-else src="https://image.baigei.com/baigei/202305/16/loading.gif"  alt="loading">
+                <span v-show="!loading" @click="loadMore">Load More...</span>
+                <img v-show="loading" src="https://image.baigei.com/baigei/202305/16/loading.gif"  alt="loading">
             </button>
         </div>
         <div class="mask" v-if="selectedImageUrl != null && selectedImageUrl !== ''" @click="selectedImageUrl = ''">
