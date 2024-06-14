@@ -13,7 +13,8 @@
                 @foreach($categories as  $category)
                     <li class="{{ request()->is('category/' . $category->slug) || request()->is(array_map(fn($item) => 'category/' . $item->slug, $category->children)) ? 'active' : '' }}  dropdown">
                         @if(count($category->children) > 0)
-                            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">{{ $category->name }} <span class="caret"></span></a>
+                            <a href="javascript:void(0)" class="dropdown-toggle"
+                               data-toggle="dropdown">{{ $category->name }} <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 @foreach($category->children as $childItem)
                                     <li>
@@ -29,7 +30,8 @@
                 @endforeach
 
                 <li class="{{ request()->is('image') ? 'active' : '' }}">
-                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">AI图片  <span class="caret"></span></a>
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">AI图片 <span
+                            class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ route('image.index')}}">全部</a></li>
                         @foreach($imageModels as $imageModel)
@@ -44,14 +46,17 @@
                     <a href="{{ route('home.guestbook') }}">留言</a>
                 </li>
             </ul>
-            {{--            <form id="search-form" class="navbar-form navbar-right" role="search" target="_blank"--}}
-            {{--                  action="{{ route('home.index') }}" method="get">--}}
-            {{--                <div class="form-group">--}}
-            {{--                    <input type="text" id="q" name="q" class="form-control" data-provide="typehead" autocomplete="off"--}}
-            {{--                           placeholder="输入关键词查找">--}}
-            {{--                </div>--}}
-            {{--                <button type="submit" class="btn btn-default" id="submitsearch">搜索</button>--}}
-            {{--            </form>--}}
+            @if(!(request()->is('image') || request()->is('guestbook')))
+                <form id="search-form" class="navbar-form navbar-right" role="search" target="_blank"
+                      action="{{ route('home.index') }}" method="get">
+                    <div class="form-group">
+                        <input type="text" id="q" name="q" class="form-control" data-provide="typehead"
+                               autocomplete="off"
+                               placeholder="输入关键词查找">
+                    </div>
+                    <input type="submit" class="btn btn-default" id="submitsearch" value="搜索">
+                </form>
+            @endif
         </div>
     </div>
 </nav>

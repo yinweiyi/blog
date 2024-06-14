@@ -8,8 +8,8 @@ use App\Models\Setting;
 use App\Models\Tag;
 use App\Services\CommentService;
 use App\Vendors\File\OSS;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -24,11 +24,15 @@ class HomeController extends Controller
      */
     public function index(Request $request): string
     {
+        $keyword = $request->query('q');
         $articles = Article::query()
             ->where('is_show', 1)
             ->with(['tags' => function ($query) {
                 $query->select(['id', 'slug', 'name']);
             }])
+            ->when(!empty($keyword), function (Builder $query) use ($keyword) {
+                $query->where('title', 'like', "%${keyword}%");
+            })
             ->orderByRaw('is_top desc, `order` desc, id desc')
             ->paginate(7, ['id', 'title', 'slug', 'author', 'html', 'markdown', 'content_type', 'views', 'created_at']);
         return i_view('home.index', compact('articles'));
