@@ -23,7 +23,7 @@ Route::get('/test', [HomeController::class, 'test'])->name('home.test');
 Route::get('/category/{category:slug}', [HomeController::class, 'category'])->where('category', '[\d\w-]{1,50}')->name('home.index_category');
 Route::get('/tag/{tag:slug}', [HomeController::class, 'tag'])->where('tag', '[\d\w-]{1,50}')->name('home.index_tag');
 
-Route::get('/about', [HomeController::class, 'about'])->name('home.about');
+//Route::get('/about', [HomeController::class, 'about'])->name('home.about');
 Route::get('/guestbook', [HomeController::class, 'guestbook'])->name('home.guestbook');
 
 Route::get('/articles/{slug}', [ArticleController::class, 'show'])->where('slug', '[\d\w-]{1,50}')->name('article.show');
