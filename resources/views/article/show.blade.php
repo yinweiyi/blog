@@ -4,6 +4,12 @@
 @section('keywords', $article->keywords)
 @section('css')
     <link rel="stylesheet" href="{{ asset('plugins/highlight/styles/atelier-forest-light.css') }}" />
+    <style>
+        .text p img {
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
 @endsection
 @section('container')
     <div class="row">
